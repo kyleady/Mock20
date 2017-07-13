@@ -1,6 +1,6 @@
 var Mock20_object = require('./Mock20_object');
 
-class Mock20_hand extends Mock20_object{
+class Mock20_jukeboxtrack extends Mock20_object{
   constructor(_id, input){
     var data = {
       _id: "",
@@ -14,3 +14,5 @@ class Mock20_hand extends Mock20_object{
     super(_id, input, data);
   }
 }
+
+module.exports = Mock20_jukeboxtrack;

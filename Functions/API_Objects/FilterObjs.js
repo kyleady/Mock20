@@ -1,7 +1,11 @@
 //see https://wiki.roll20.net/API:Objects#filterObjs.28callback.29
 var Bank = require('./../../Mock20_ObjectBank');
+require('./../../Mock20_Output');
 module.exports = function(testFunc){
-  if(typeof testFunc != 'function'){return undefined;}
+  if(typeof testFunc != 'function'){
+    Mock20_warning("Invalid testFunc for filterObjs()");
+    return [];
+  }
   var Found = [];
   for(var type in Bank){
     for(var id in Bank[type]){

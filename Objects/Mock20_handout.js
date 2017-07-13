@@ -16,3 +16,5 @@ class Mock20_handout extends Mock20_character{
     super(_id, input, data);
   }
 }
+
+module.exports = Mock20_handout;

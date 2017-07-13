@@ -1,4 +1,5 @@
 var Mock20_object = require('./Mock20_object');
+require('./../Mock20_Output');
 
 class Mock20_statusmarkers {
   constructor(str){
@@ -189,12 +190,4 @@ class Mock20_graphic extends Mock20_object{
   }
 }
 
-var graphic = new Mock20_graphic("1");
-console.log(graphic.get("_type"));
-graphic.set("statusmarkers","red,blue@2,green");
-console.log(graphic.get("statusmarkers"));
-console.log(graphic.get("status_red"))
-console.log(graphic.get("status_blue"))
-console.log(graphic.get("status_yellow"))
-graphic.set("status_red","3");
-console.log(graphic.get("status_red"))
+module.exports = Mock20_graphic;

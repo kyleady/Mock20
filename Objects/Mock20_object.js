@@ -1,3 +1,5 @@
+require('./../Mock20_Output');
+
 class Mock20_object{
   constructor(_id, input, data){
     this.Mock20_data = data || {

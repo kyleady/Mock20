@@ -12,3 +12,5 @@ class Mock20_card extends Mock20_object{
     super(_id, input, data);
   }
 }
+
+module.exports = Mock20_card;

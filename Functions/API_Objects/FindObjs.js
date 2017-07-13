@@ -1,10 +1,18 @@
 //see https://wiki.roll20.net/API:Objects#findObjs.28attrs.29
 var Bank = require('./../../Mock20_ObjectBank');
+require('./../../Mock20_Output');
 module.exports = function(attrs, options){
+  if(typeof attrs != "object"){
+    Mock20_warning("Invalid attrs for findObjs()");
+    return undefined;
+  }
+  if(options && typeof options != "object"){
+    Mock20_warning("Invalid options for findObjs()");
+    options = undefined;
+  }
   options = options || {
     caseInsensitive: false
   };
-  if(typeof attrs != "object"){return undefined;}
   var types = {};
   if(attrs._type){
     if(Bank[attrs._type] == undefined){return undefined;}
@@ -32,6 +40,7 @@ function findObjsInType(attrs, type, options){
       Found.push(type[obj]);
     }
   }
+  return Found;
 }
 
 function matchingObj(attrs, obj, options){

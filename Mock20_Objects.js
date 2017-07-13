@@ -18,5 +18,5 @@ var names = [
 ];
 
 for(var i = 0; i < names.length; i++){
-  exports['Mock20_' + names[i]] = require('./Objects/Mock20_' + names[i]);
+  module.exports[names[i]] = require('./Objects/Mock20_' + names[i]);
 }

@@ -1,4 +1,4 @@
-exports = Mock20_objBank = {
+module.exports = {
   ability: {},
   attribute: {},
   card: {},

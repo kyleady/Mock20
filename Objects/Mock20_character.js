@@ -16,15 +16,15 @@ class Mock20_character extends Mock20_object{
     }
     super(_id, input, data);
   }
-}
 
-get(property, callBack){
-  if(property == "bio" || property == "gmnotes" || property == "notes"){
-    setTimeout(function(){
-      callBack(this.Mock20_data[property]);
-    }, 1000);
-  } else {
-    return super.get(property);
+  get(property, callBack){
+    if(property == "bio" || property == "gmnotes" || property == "notes"){
+      setTimeout(function(){
+        callBack(this.Mock20_data[property]);
+      }, 1000);
+    } else {
+      return super.get(property);
+    }
   }
 }
 
