@@ -1,8 +1,8 @@
-var Mock20_object = require('./Mock20_object').Mock20_object;
+var Mock20_object = require('./Mock20_object');
 
 class Mock20_statusmarkers {
   constructor(str){
-    var markerArray = this.Mock20_data.statusmarkers.split(",");
+    var markerArray = str.split(",");
     for(var i = 0; i < markerArray.length; i++){
       var matches = markerArray[i].match(/^([^@]+)@?(\d*)$/);
       if(matches){
@@ -17,11 +17,11 @@ class Mock20_statusmarkers {
 
   toString(){
     var markerStr = "";
-    for(var k in obj){
-      if(obj[k] && typeof obj[k] != "function"){
+    for(var k in this){
+      if(this[k] && typeof this[k] != "function"){
         markerStr += k;
-        if(/\d+/.test(obj[k])){
-          markerStr += "@" + obj[k]
+        if(/\d+/.test(this[k])){
+          markerStr += "@" + this[k]
         }
         markerStr += ",";
       }

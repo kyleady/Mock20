@@ -1,3 +1,5 @@
+var Mock20_object = require('./Mock20_object');
+
 class Mock20_character extends Mock20_object{
   constructor(_id, input, data){
     data = data || {
@@ -25,3 +27,5 @@ get(property, callBack){
     return super.get(property);
   }
 }
+
+module.exports = Mock20_character;

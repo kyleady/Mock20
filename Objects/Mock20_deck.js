@@ -1,3 +1,5 @@
+var Mock20_object = require('./Mock20_object');
+
 class Mock20_deck extends Mock20_object{
   constructor(_id, input){
     var data = {

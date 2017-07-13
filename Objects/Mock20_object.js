@@ -43,4 +43,4 @@ class Mock20_object{
   }
 }
 
-exports.Mock20_object = Mock20_object;
+module.exports = Mock20_object;
