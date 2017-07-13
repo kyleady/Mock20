@@ -1,3 +1,35 @@
+var Mock20_object = require('./Mock20_object').Mock20_object;
+
+class Mock20_statusmarkers {
+  constructor(str){
+    var markerArray = this.Mock20_data.statusmarkers.split(",");
+    for(var i = 0; i < markerArray.length; i++){
+      var matches = markerArray[i].match(/^([^@]+)@?(\d*)$/);
+      if(matches){
+        if(matches[2]){
+          this[matches[1]] = matches[2];
+        } else {
+          this[matches[1]] = true;
+        }
+      }
+    }
+  }
+
+  toString(){
+    var markerStr = "";
+    for(var k in obj){
+      if(obj[k] && typeof obj[k] != "function"){
+        markerStr += k;
+        if(/\d+/.test(obj[k])){
+          markerStr += "@" + obj[k]
+        }
+        markerStr += ",";
+      }
+    }
+    return markerStr.replace(/,$/,"");
+  }
+}
+
 class Mock20_graphic extends Mock20_object{
   constructor(_id, input){
     var data = {
@@ -59,7 +91,8 @@ class Mock20_graphic extends Mock20_object{
       lastmove: "",
       light_multiplier: "1"
     }
-    var valid_markers = [
+    super(_id, input, data);
+    this.valid_markers = [
       "red",
       "blue",
       "green",
@@ -116,48 +149,16 @@ class Mock20_graphic extends Mock20_object{
       "angel-outfit",
       "archery-target"
     ];
-    super(_id, input);
-  }
-
-  function getMarkerObj(){
-    var markerArray = data.statusmarkers.split(",");
-    var markerObj = {};
-    _.each(markerArray, function(marker){
-      var matches = marker.match(/^([^@]+)@?(\d*)$/);
-      if(matches){
-        if(matches[2]){
-          markerObj[matches[1]] = matches[2];
-        } else {
-          markerObj[matches[1]] = true;
-        }
-      }
-    });
-    return markerObj;
-  }
-
-  function saveMarkerObj(obj){
-    var markerStr = "";
-    for(var k in obj){
-      if(obj[k]){
-        markerStr += k;
-        if(/\d+/.test(obj[k])){
-          markerStr += "@" + obj[k]
-        }
-        markerStr += ",";
-      }
-    }
-    markerStr = markerStr.replace(/,$/,"");
-    this.set("statusmarkers", markerStr);
   }
 
   get(property){
     if(/^status_/.test(property)){
       property = property.replace("status_","");
-      if(valid_markers.indexOf(property) == -1){
-        Mock20_warning(data._type + " does not have a " + property + " status marker.");
+      if(this.valid_markers.indexOf(property) == -1){
+        Mock20_warning(this.Mock20_data._type + " does not have a " + property + " status marker.");
         return;
       }
-      var markerObj = getMarkerObj();
+      var markerObj = new Mock20_statusmarkers(this.Mock20_data.statusmarkers);
       if(markerObj[property]){
         return markerObj[property];
       } else {
@@ -171,19 +172,29 @@ class Mock20_graphic extends Mock20_object{
   set(property, newValue){
     if(/^status_/.test(property)){
       property = property.replace("status_","");
-      if(valid_markers.indexOf(property) == -1){
-        Mock20_warning(data._type + " does not have a " + property + " status marker.");
+      if(this.valid_markers.indexOf(property) == -1){
+        Mock20_warning(this.Mock20_data._type + " does not have a " + property + " status marker.");
         return;
       }
-      var markerObj = getMarkerObj();
+      var markerObj = new Mock20_statusmarkers(this.Mock20_data.statusmarkers);
       if(typeof newValue == "string" && /^\d+$/.test(newValue)){
         markerObj[property] = newValue;
       } else {
         markerObj[property] = newValue == true;
       }
-      saveMarkerObj(markerObj);
+      super.set("statusmarkers", markerObj.toString());
     } else {
       return super.set(property, newValue);
     }
   }
 }
+
+var graphic = new Mock20_graphic("1");
+console.log(graphic.get("_type"));
+graphic.set("statusmarkers","red,blue@2,green");
+console.log(graphic.get("statusmarkers"));
+console.log(graphic.get("status_red"))
+console.log(graphic.get("status_blue"))
+console.log(graphic.get("status_yellow"))
+graphic.set("status_red","3");
+console.log(graphic.get("status_red"))

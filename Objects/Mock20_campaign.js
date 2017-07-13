@@ -10,6 +10,6 @@ class Mock20_campaign extends Mock20_object{
       _journalfolder: "",
       _jukeboxfolder: ""
     }
-    super(_id, input);
+    super(_id, input, data);
   }
 }

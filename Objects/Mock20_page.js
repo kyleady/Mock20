@@ -26,6 +26,6 @@ class Mock20_page extends Mock20_object{
       lightrestrictmove: false,
       lightglobalilim: false
     }
-    super(_id, input);
+    super(_id, input, data);
   }
 }

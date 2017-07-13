@@ -12,6 +12,6 @@ class Mock20_player extends Mock20_object{
       color: "#13B9F0",
       showmacrobar: false
     }
-    super(_id, input);
+    super(_id, input, data);
   }
 }

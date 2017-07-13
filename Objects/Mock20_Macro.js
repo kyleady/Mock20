@@ -9,6 +9,6 @@ class Mock20_macro extends Mock20_object{
       visibleto: "",
       istokenaction: false
     }
-    super(_id, input);
+    super(_id, input, data);
   }
 }

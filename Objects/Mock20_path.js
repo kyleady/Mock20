@@ -18,6 +18,6 @@ class Mock20_path extends Mock20_object{
       scaleY: 1,
       controlledby: ""
     }
-    super(_id, input);
+    super(_id, input, data);
   }
 }

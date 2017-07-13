@@ -8,6 +8,6 @@ class Mock20_tableitem extends Mock20_object{
       name: "",
       weight: 1
     }
-    super(_id, input);
+    super(_id, input, data);
   }
 }

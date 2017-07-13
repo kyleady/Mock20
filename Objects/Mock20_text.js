@@ -16,6 +16,6 @@ class Mock20_text extends Mock20_object{
       layer: "",
       controlledby: ""
     }
-    super(_id, input);
+    super(_id, input, data);
   }
 }

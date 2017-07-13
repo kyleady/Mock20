@@ -6,6 +6,6 @@ class Mock20_rollabletable extends Mock20_object{
       name: "new-table",
       showplayers: true
     }
-    super(_id, input);
+    super(_id, input, data);
   }
 }
