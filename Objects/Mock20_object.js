@@ -41,6 +41,11 @@ class Mock20_object{
     }
     Mock20_warning(this.Mock20_data._type + " does not have a " + property + " property.");
   }
+
+  remove(){
+    var Bank = require('./../Mock20_ObjectBank');
+    delete Bank[this.Mock20_data._type][this.Mock20_data._id];
+  }
 }
 
 module.exports = Mock20_object;
