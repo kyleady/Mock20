@@ -1,3 +1,8 @@
+//see https://wiki.roll20.net/API:Events
+//Mock20_trigger() is used in
+//  -Functions/API_Objects/CreateObj.js
+//  -Objects/Mock20_object.js
+//  -Mock20.js
 require('./../../Mock20_Output');
 var responses = {};
 
