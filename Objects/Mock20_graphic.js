@@ -4,8 +4,8 @@ require('./../Mock20_Output');
 class Mock20_statusmarkers {
   constructor(str){
     var markerArray = str.split(",");
-    for(var i = 0; i < markerArray.length; i++){
-      var matches = markerArray[i].match(/^([^@]+)@?(\d*)$/);
+    for(var marker of markerArray){
+      var matches = marker.match(/^([^@]+)@?(\d*)$/);
       if(matches){
         if(matches[2]){
           this[matches[1]] = matches[2];

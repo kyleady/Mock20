@@ -1,4 +1,20 @@
 require('./../Mock20_Output');
+require('./../Functions/API_Events/On');
+var Bank = require('./../Mock20_ObjectBank');
+
+class Mock20_prevObject{
+  constructor(obj){
+    for(var k in obj.Mock20_data){
+      this[k] = obj.Mock20_data[k];
+    }
+  }
+  get(property){
+    return this[property];
+  }
+  set(property, newValue){
+    return this[property] = newValue;
+  }
+}
 
 class Mock20_object{
   constructor(_id, input, data){
@@ -39,13 +55,17 @@ class Mock20_object{
       Mock20_warning(property + " is a protected property.");
     }
     if(this.Mock20_data[property] != undefined){
-      return this.Mock20_data[property] = newValue;
+      var prev = new Mock20_prevObject(this);
+      this.Mock20_data[property] = newValue;
+      Mock20_trigger("change:" + this.Mock20_data._type + ":" + property, this, prev);
+      Mock20_trigger("change:" + this.Mock20_data._type, this, prev);
+      return this.Mock20_data[property];
     }
     Mock20_warning(this.Mock20_data._type + " does not have a " + property + " property.");
   }
 
   remove(){
-    var Bank = require('./../Mock20_ObjectBank');
+    Mock20_trigger("destroy:" + this.Mock20_data._type, this);
     delete Bank[this.Mock20_data._type][this.Mock20_data._id];
   }
 }

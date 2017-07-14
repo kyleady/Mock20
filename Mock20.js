@@ -8,4 +8,10 @@ global.getAttrByName = require('./Functions/API_Objects/GetAttrByName');
 global.getObj = require('./Functions/API_Objects/GetObj');
 global.state = {};
 
+//Functions - API:Events
+global.on = require('./Functions/API_Events/On')
+global.Mock20_endOfLastScript = function(){
+  Mock20_trigger("ready");
+}
+
 global._ = require('underscore');

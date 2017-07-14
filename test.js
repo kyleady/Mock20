@@ -73,3 +73,21 @@ console.log('==Underscore==')
 _.each(["underscore", "is", "available"], function(text){
   console.log(text);
 });
+
+console.log('==On==')
+on("ready", function(){console.log('Campaign ready.')});
+on("destroy:path", function(obj, prev){ console.log(obj.get("_type") + " destroyed.");});
+on("change:path", function(obj){ console.log(obj.get("_type") + " changed.");});
+on("change:path:rotation", function(obj, prev){ console.log(obj.get("_type") + " rotation changed from " + prev["rotation"] + " to " + obj.get("rotation"));});
+on("change:path:rotation", function(obj, prev){ console.log(obj.get("_type") + " rotation changed from " + prev.get("rotation") + " to " + obj.get("rotation") + " (2nd function)");});
+on("add:path", function(obj){ console.log(obj.get("_type") + " added.");});
+console.log("creating path...");
+var path = createObj("path");
+console.log("changing path width...");
+path.set("width", 5);
+console.log("changing path rotation...")
+path.set("rotation", 10);
+console.log("deleting path...")
+path.remove();
+
+Mock20_endOfLastScript();
