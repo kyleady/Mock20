@@ -9,9 +9,13 @@ global.getObj = require('./Functions/API_Objects/GetObj');
 global.state = {};
 
 //Functions - API:Events
-global.on = require('./Functions/API_Events/On')
+global.on = require('./Functions/API_Events/On');
 global.Mock20_endOfLastScript = function(){
   Mock20_trigger("ready");
 }
 
+//Functions - API:Chat
+global.sendChat = require('./Functions/API_Chat/SendChat');
+
+//Functions - API:Utility
 global._ = require('underscore');

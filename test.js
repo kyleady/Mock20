@@ -26,7 +26,7 @@ graphic2 = filterObjs(function(obj){
 console.log(graphic2.get("name"));
 
 console.log('==Get Attribute By Name==')
-var character = createObj("character", {name: "Chracter Name"});
+var character = createObj("character", {name: "Character Name"});
 var attribute = createObj("attribute", {
   name: "Attribute Name",
   _characterid: character.id,
@@ -89,5 +89,21 @@ console.log("changing path rotation...")
 path.set("rotation", 10);
 console.log("deleting path...")
 path.remove();
+
+console.log('==Send Chat==')
+on("chat:message", function(msg){console.log(msg);});
+var player20 = createObj("player", {_displayname: "player 20"});
+var tester = createObj("player", {_displayname: "tester"});
+var character20 = createObj("character", {name: "character 20", controlledby: player20.id});
+var everyman = createObj("character", {name: "everyman", controlledby: "all," + tester.id});
+sendChat("player|" + player20.id, "This is a test!");
+sendChat("The System", "/w Character Hello there, Character Name or character 20. It depends who was found first.");
+sendChat("player|" + tester.id, "/w \"Character Name\" Hello there, Character Name.");
+sendChat("player|" + tester.id, "/w everyman Hello there, everyone who controls everyman.");
+sendChat("character|" + character.id, "/w \"Character 20\" Hello there, player 20 through character 20.");
+sendChat("The Tester", "/em shakes his fist.");
+sendChat("Tester", "[[d20]] [[[[d20]]d20]]");
+sendChat("Tester", "/r D20");
+sendChat("Tester", "/gr d20");
 
 Mock20_endOfLastScript();
