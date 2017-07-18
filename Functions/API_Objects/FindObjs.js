@@ -11,7 +11,8 @@ module.exports = function(attrs, options){
     options = undefined;
   }
   options = options || {
-    caseInsensitive: false
+    caseInsensitive: false,
+    Mock20_override: false
   };
   var types = {};
   if(attrs._type){
@@ -19,6 +20,7 @@ module.exports = function(attrs, options){
     types[attrs._type] = true;
   } else {
     for(var type in Bank){
+      if(type == "folder" && !options.Mock20_override){continue;}
       types[type] = true;
     }
   }

@@ -1,13 +1,25 @@
 //see https://wiki.roll20.net/API:Objects#Creating_Objects
-var Objects = require('./../../Mock20_Objects');
 var Bank = require('./../../Mock20_ObjectBank');
-require('./../API_Events/On');
+var Objects = require('./../../Mock20_Objects');
 require('./../../Mock20_Output');
+var validObjs = {
+   graphic: true,
+   text: true,
+   path: true,
+   character: true,
+   ability: true,
+   attribute: true,
+   handout: true,
+   rollabletable: true,
+   tableitem: true,
+   macro: true
+}
 
-var Mock20_objCounter = 0;
-
-module.exports = function(type, attributes){
-  if(typeof type != "string" || !Bank[type]){
+module.exports = function(type, attributes, options){
+  if(!options || typeof options != 'object'){
+    options = {};
+  }
+  if(typeof type != "string" || (!validObjs[type] && !options.Mock20_override)){
     Mock20_warning("creatObj() cannot create " + type + " objects.");
     return undefined;
   }
@@ -15,9 +27,5 @@ module.exports = function(type, attributes){
     Mock20_warning("Invalid attributes for creatObj(\"" + type + "\").");
     attributes = {};
   }
-  var id = Mock20_objCounter.toString(16);
-  Mock20_objCounter++;
-  Bank[type][id] = new Objects[type](id, attributes);
-  Mock20_trigger("add:" + type, Bank[type][id]);
-  return Bank[type][id];
+  return Bank.create(Objects[type], attributes);
 }

@@ -1,4 +1,5 @@
 var Mock20_object = require('./Mock20_object');
+var Campaign = require("./../Functions/API_Objects/Campaign");
 
 class Mock20_jukeboxtrack extends Mock20_object{
   constructor(_id, input){
@@ -12,6 +13,10 @@ class Mock20_jukeboxtrack extends Mock20_object{
       loop: false
     }
     super(_id, input, data);
+  }
+
+  addToJukebox(){
+    Campaign().Mock20_update("_jukeboxfolder", Campaign().get("_jukeboxfolder") + "," + this.id);
   }
 }
 

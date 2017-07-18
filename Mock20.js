@@ -19,3 +19,15 @@ global.sendChat = require('./Functions/API_Chat/SendChat');
 
 //Functions - API:Utility
 global._ = require('underscore');
+global.playJukeboxPlaylist = require('./Functions/API_Utility/Jukebox.js').playJukeboxPlaylist;
+global.stopJukeboxPlaylist = require('./Functions/API_Utility/Jukebox.js').stopJukeboxPlaylist;
+global.log = require('./Functions/API_Utility/Log.js');
+global.toFront = require('./Functions/API_Utility/ObjectOrdering.js').toFront;
+global.toBack = require('./Functions/API_Utility/ObjectOrdering.js').toBack;
+global.playerIsGM = require('./Functions/API_Utility/PlayerIsGM.js');
+global.randomInteger = require('./Functions/API_Utility/RandomInteger.js');
+global.sendPing = require('./Functions/API_Utility/SendPing.js');
+global.setDefaultTokenForCharacter = require('./Functions/API_Utility/SetDefaultTokenForCharacter.js');
+global.spawnFx = require('./Functions/API_Utility/SpecialEffects.js').spawnFx;
+global.spawnFxBetweenPoints = require('./Functions/API_Utility/SpecialEffects.js').spawnFxBetweenPoints;
+global.spawnFxWithDefinition = require('./Functions/API_Utility/SpecialEffects.js').spawnFxWithDefinition;

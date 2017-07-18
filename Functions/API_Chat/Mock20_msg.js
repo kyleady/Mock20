@@ -1,10 +1,11 @@
 class Mock20_msg{
-  constructor(speakingAs, input){
-    this.parseSpeaker(speakingAs);
+  constructor(speakingAs, input, options){
+    options = options || {};
+    this.parseSpeaker(speakingAs, options);
     this.parseInput(input);
   }
 
-  parseSpeaker(speakingAs){
+  parseSpeaker(speakingAs, options){
     if(/^character\|/.test(speakingAs)){
       var id = speakingAs.replace("character|","");
       var character = getObj("character", id);
@@ -21,7 +22,11 @@ class Mock20_msg{
     if(!this.who){
       this.who = speakingAs;
     }
-    this.playerid = "API";
+    if(options.playerid){
+      this.playerid = options.playerid;
+    } else {
+      this.playerid = "API";
+    }
   }
 
   parseInput(input){

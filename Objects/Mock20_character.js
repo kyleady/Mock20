@@ -1,4 +1,5 @@
 var Mock20_object = require('./Mock20_object');
+var Campaign = require("./../Functions/API_Objects/Campaign");
 
 class Mock20_character extends Mock20_object{
   constructor(_id, input, data){
@@ -25,6 +26,12 @@ class Mock20_character extends Mock20_object{
     } else {
       return super.get(property);
     }
+  }
+
+  addToJournal(){
+    var newList = this.id + "," + Campaign().get("_journalfolder");
+    newList = newList.replace(/,$/,"");
+    Campaign().Mock20_update("_journalfolder", newList);
   }
 }
 

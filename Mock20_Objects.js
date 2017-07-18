@@ -4,6 +4,7 @@ var names = [
   'card',
   'character',
   'deck',
+  'folder',
   'graphic',
   'hand',
   'handout',
@@ -12,6 +13,7 @@ var names = [
   'page',
   'path',
   'player',
+  'playlist',
   'rollabletable',
   'tableitem',
   'text'

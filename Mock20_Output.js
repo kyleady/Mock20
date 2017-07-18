@@ -3,9 +3,9 @@ global.Mock20_warning = function(msg, options){
 }
 
 global.Mock20_log = function(msg, options, speakingAs){
-  var output = "";
   if(speakingAs){
-    output += speakingAs + ": ";
+    console.log(speakingAs + ": " + msg);
+  } else {
+    console.log(msg);
   }
-  console.log(output + msg);
 }

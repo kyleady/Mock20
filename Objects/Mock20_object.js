@@ -46,6 +46,7 @@ class Mock20_object{
       for(var k in property){
         this.set(k, property[k]);
       }
+      return;
     }
     if(newValue == undefined){
       Mock20_warning("You cannot set a value to undefined.")
@@ -55,18 +56,26 @@ class Mock20_object{
       Mock20_warning(property + " is a protected property.");
     }
     if(this.Mock20_data[property] != undefined){
-      var prev = new Mock20_prevObject(this);
-      this.Mock20_data[property] = newValue;
-      Mock20_trigger("change:" + this.Mock20_data._type + ":" + property, this, prev);
-      Mock20_trigger("change:" + this.Mock20_data._type, this, prev);
-      return this.Mock20_data[property];
+      return this.Mock20_update(property, newValue);
     }
     Mock20_warning(this.Mock20_data._type + " does not have a " + property + " property.");
   }
 
+  Mock20_update(property, newValue){
+    var prev = new Mock20_prevObject(this);
+    if(newValue != undefined){
+      this.Mock20_data[property] = newValue;
+    }
+    if(property != undefined){
+      Mock20_trigger("change:" + this.Mock20_data._type + ":" + property, this, prev);
+    }
+    Mock20_trigger("change:" + this.Mock20_data._type, this, prev);
+    return this.Mock20_data[property];
+  }
+
   remove(){
-    Mock20_trigger("destroy:" + this.Mock20_data._type, this);
-    delete Bank[this.Mock20_data._type][this.Mock20_data._id];
+    Mock20_trigger("destroy:" + this.get("_type"), this);
+    Bank.remove(this.get("_type"), this.id);
   }
 }
 
