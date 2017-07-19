@@ -22,7 +22,7 @@ class Mock20_playlist extends Mock20_folder{
       s: this.Mock20_data.s
     };
   }
-  Mock20_update(property, newValue, journal){
+  Mock20_update(property, newValue){
     return super.Mock20_update(property, newValue, "_jukeboxfolder");
   }
   backToBack(){
@@ -40,7 +40,7 @@ class Mock20_playlist extends Mock20_folder{
   removeFromJukebox(){
     super.removeFromJournal("_jukeboxfolder");
   }
-  static getRootFolder(journal, type){
+  static getRootFolder(){
     return super.getRootFolder("_jukeboxfolder", "playlist");
   }
   saveAsRoot(){

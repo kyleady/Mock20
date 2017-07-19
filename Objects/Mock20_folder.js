@@ -15,8 +15,9 @@ class Mock20_folder extends Mock20_object{
 
   Mock20_update(property, newValue, journal){
     journal = journal || "_journalfolder";
-    var oldValue = this.Mock20_data[property];
-    this.Mock20_data[property] = newValue;
+    if(property != undefined && newValue != undefined){
+      this.Mock20_data[property] = newValue;
+    }
     var rootfolder = this.constructor.getRootFolder(journal);
     rootfolder.saveAsRoot(journal);
   }

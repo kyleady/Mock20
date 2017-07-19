@@ -37,3 +37,4 @@ global.Mock20_moveToFolder = require('./Functions/Mock20_Setup/FolderStructure.j
 global.Mock20_moveBeforeFolderItem = require('./Functions/Mock20_Setup/FolderStructure.js').Mock20_moveBeforeFolderItem;
 global.Mock20_moveToPlaylist = require('./Functions/Mock20_Setup/FolderStructure.js').Mock20_moveToPlaylist;
 global.Mock20_moveBeforePlaylistItem = require('./Functions/Mock20_Setup/FolderStructure.js').Mock20_moveBeforePlaylistItem;
+global.Mock20_sortFolder = require('./Functions/Mock20_Setup/SortFolder.js');

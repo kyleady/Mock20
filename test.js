@@ -177,22 +177,24 @@ on("change:campaign:_jukeboxfolder", function(obj){log(obj.get("_jukeboxfolder")
 log("Create Playlist 1")
 var playlist1 = createObj("playlist", {n: "Playlist 1"}, {Mock20_override: true});
 log("Create Spooky Music")
-var spooky = createObj("jukeboxtrack", {n: "Spooky Music"}, {Mock20_override: true});
+var spooky = createObj("jukeboxtrack", {title: "Spooky Music"}, {Mock20_override: true});
 log("Create Happy Music")
-var happy = createObj("jukeboxtrack", {n: "Happy Music"}, {Mock20_override: true});
+var happy = createObj("jukeboxtrack", {title: "Happy Music"}, {Mock20_override: true});
 log("Create Sad Music")
-var sad = createObj("jukeboxtrack", {n: "Sad Music"}, {Mock20_override: true});
+var sad = createObj("jukeboxtrack", {title: "Sad Music"}, {Mock20_override: true});
 log("Create Playlist 2")
 var playlist2 = createObj("playlist", {n: "Playlist 2"}, {Mock20_override: true});
 log("Move Spooky Music into Playlist 1")
 Mock20_moveToPlaylist(spooky, playlist1.id);
 log("Move Happy Music into Playlist 1")
 Mock20_moveToPlaylist(happy, playlist1.id);
+log("Sort Playlist 1")
+Mock20_sortFolder(playlist1);
 log("Move Sad Music into Playlist 2")
 Mock20_moveToPlaylist(sad, playlist2.id);
 log("Delete Playlist 1")
 playlist1.remove({Mock20_override: true});
-log("Move Playlist 2 before Happy Music")
-Mock20_moveBeforePlaylistItem(playlist2, happy.id);
+log("Move Playlist 2 before Spooky Music")
+Mock20_moveBeforePlaylistItem(playlist2, spooky.id);
 
 Mock20_endOfLastScript();
