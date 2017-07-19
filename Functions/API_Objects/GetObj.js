@@ -31,7 +31,5 @@ module.exports = function(type, id, options){
     Mock20_warning(id + " is an invalid id for getObj().");
     return undefined;
   }
-  if(Bank[type]){
-    return Bank[type][id];
-  }
+  return Bank.get(type, id);
 }

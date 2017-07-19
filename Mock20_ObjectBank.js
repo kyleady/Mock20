@@ -19,12 +19,21 @@ class Mock20_bank {
     return obj;
   }
 
-  remove(type, id){
+  get(type, id){
+    if(this[type]){
+      return this[type][id];
+    }
+  }
+
+  remove(type, id, options){
+    options = options || {Mock20_messyDelete: false};
     if(!this[type] || !this[type][id]){return;}
     var obj = this[type][id];
-    //this.removeFromPage(this[type][id]); Roll20 currently fails to send an event for removing an object from a page
-    if(obj.removeFromJournal){obj.removeFromJournal();} //Roll20 currently fails to send an event for removing a character/handout from the journal
-    if(obj.removeFromJukebox){obj.removeFromJukebox();} //Roll20 currently fails to send an event for removing a jukeboxtrack from the jukebox
+    if(!options.Mock20_messyDelete){
+      //this.removeFromPage(this[type][id]); Roll20 currently fails to send an event for removing an object from a page
+      if(obj.removeFromJournal){obj.removeFromJournal();} //Roll20 currently fails to send an event for removing a character/handout from the journal
+      if(obj.removeFromJukebox){obj.removeFromJukebox();} //Roll20 currently fails to send an event for removing a jukeboxtrack from the jukebox
+    }
     delete this[type][id];
   }
 

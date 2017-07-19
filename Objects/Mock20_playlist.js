@@ -5,8 +5,8 @@ class Mock20_playlist extends Mock20_folder{
   constructor(_id, input){
     var data = {
       _id: "",
-      _type: "folder",
-      n: "Folder",
+      _type: "playlist",
+      n: "Playlist",
       _i: [],
       s: "s"
     }
@@ -23,7 +23,7 @@ class Mock20_playlist extends Mock20_folder{
     };
   }
   Mock20_update(property, newValue, journal){
-    super.Mock20_update(property, newValue, "_jukeboxfolder");
+    return super.Mock20_update(property, newValue, "_jukeboxfolder");
   }
   backToBack(){
     return this.set("s", "b");
@@ -39,6 +39,12 @@ class Mock20_playlist extends Mock20_folder{
   }
   removeFromJukebox(){
     super.removeFromJournal("_jukeboxfolder");
+  }
+  static getRootFolder(journal, type){
+    return super.getRootFolder("_jukeboxfolder", "playlist");
+  }
+  saveAsRoot(){
+    super.saveAsRoot("_jukeboxfolder");
   }
 }
 

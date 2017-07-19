@@ -1,6 +1,18 @@
 require('./../Mock20_Output');
 require('./../Functions/API_Events/On');
 var Bank = require('./../Mock20_ObjectBank');
+var canRemove = {
+   graphic: true,
+   text: true,
+   path: true,
+   character: true,
+   ability: true,
+   attribute: true,
+   handout: true,
+   rollabletable: true,
+   tableitem: true,
+   macro: true
+}
 
 class Mock20_prevObject{
   constructor(obj){
@@ -73,9 +85,14 @@ class Mock20_object{
     return this.Mock20_data[property];
   }
 
-  remove(){
+  remove(options){
+    options = options || {};
+    if(!canRemove[this.get("_type")] && !options.Mock20_override){
+      Mock20_warning("Cannot remove " + this.get("_type") + " objects.");
+      return;
+    }
     Mock20_trigger("destroy:" + this.get("_type"), this);
-    Bank.remove(this.get("_type"), this.id);
+    Bank.remove(this.get("_type"), this.id, options);
   }
 }
 

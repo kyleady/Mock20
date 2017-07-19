@@ -122,7 +122,7 @@ toBack(graphic);
 log(page.get("_zorder"));
 toFront(graphic);
 log(page.get("_zorder"));
-log("The recently deleted Path 7 disappeared only when we started rearranging objects.")
+log("The recently deleted Path 7 disappeared only when we started rearranging objects. This is how Roll20 behaves and I sought to replicate it.")
 
 log("==Player Is GM==")
 player20.Mock20_gm = true;
@@ -146,5 +146,53 @@ log(JSON.stringify(rolls));
 log("==Send Ping==");
 sendPing();
 log("empty function");
+
+log("==Journal==");
+on("change:campaign:_journalfolder", function(obj){log(obj.get("_journalfolder"));});
+log("Create Folder 1")
+var folder1 = createObj("folder", {n: "Folder 1"}, {Mock20_override: true});
+log("Create Suspicious Note")
+var handout = createObj("handout", {n: "Suspicious Note"});
+log("Create Folder 2")
+var folder2 = createObj("folder", {n: "Folder 2"}, {Mock20_override: true});
+log("Move Folder 2 into Folder 1")
+Mock20_moveToFolder(folder2, folder1.id);
+log("Move Suspicious Note into Folder 1")
+Mock20_moveToFolder(handout, folder1.id);
+log("Move Folder 1 into the Root Folder")
+Mock20_moveToFolder(folder1, "root_folder");
+log("Move Folder 1 before the Suspicious Note (inside of itself).")
+Mock20_moveBeforeFolderItem(folder1, handout.id);
+log("Move character 20 into Folder 2")
+Mock20_moveToFolder(character20, folder2.id);
+log("Move Folder 1 before Chracter Name");
+Mock20_moveBeforeFolderItem(folder1, character.id);
+log("Delete Folder 1")
+folder1.remove({Mock20_override: true});
+log("Does the subfolder, Folder 2, exist anymore?")
+log(getObj("folder", folder2.id, {Mock20_override: true}) ? "Yep!" : "Nope.");
+
+log("==Jukebox==");
+on("change:campaign:_jukeboxfolder", function(obj){log(obj.get("_jukeboxfolder"));});
+log("Create Playlist 1")
+var playlist1 = createObj("playlist", {n: "Playlist 1"}, {Mock20_override: true});
+log("Create Spooky Music")
+var spooky = createObj("jukeboxtrack", {n: "Spooky Music"}, {Mock20_override: true});
+log("Create Happy Music")
+var happy = createObj("jukeboxtrack", {n: "Happy Music"}, {Mock20_override: true});
+log("Create Sad Music")
+var sad = createObj("jukeboxtrack", {n: "Sad Music"}, {Mock20_override: true});
+log("Create Playlist 2")
+var playlist2 = createObj("playlist", {n: "Playlist 2"}, {Mock20_override: true});
+log("Move Spooky Music into Playlist 1")
+Mock20_moveToPlaylist(spooky, playlist1.id);
+log("Move Happy Music into Playlist 1")
+Mock20_moveToPlaylist(happy, playlist1.id);
+log("Move Sad Music into Playlist 2")
+Mock20_moveToPlaylist(sad, playlist2.id);
+log("Delete Playlist 1")
+playlist1.remove({Mock20_override: true});
+log("Move Playlist 2 before Happy Music")
+Mock20_moveBeforePlaylistItem(playlist2, happy.id);
 
 Mock20_endOfLastScript();

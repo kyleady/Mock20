@@ -17,31 +17,32 @@ class Mock20_folder extends Mock20_object{
     journal = journal || "_journalfolder";
     var oldValue = this.Mock20_data[property];
     this.Mock20_data[property] = newValue;
-    var newStructure = this.getRootFolder(journal).getStructure()._i;
-    this.Mock20_data[property] = oldValue;
-    Campaign().Mock20_update(journal, JSON.stingify(newStructure));
-    this.Mock20_data[property] = newValue;
+    var rootfolder = this.constructor.getRootFolder(journal);
+    rootfolder.saveAsRoot(journal);
   }
 
-  getRootFolder(journal){
+  static getRootFolder(journal, type){
     journal = journal || "_journalfolder";
+    type = type || "folder";
     var items = [];
-    var rootInventory = JSON.parse("[" + Campaign().get(journal) + "]");
+    var rootInventory = JSON.parse("[" + addQuotesToEachString(Campaign().get(journal)) + "]");
     for(var item of rootInventory){
       if(typeof item == "object"){
         items.push({
           _id: item.id.toString(),
-          _type: "folder"
+          _type: type
         });
       } else {
+        var obj = findObjs({_id: item.toString()})[0];
+        if(!obj){continue;}
         items.push({
-          _id: item.toString(),
-          _type: "handout"
+          _id: obj.id,
+          _type: obj.get("_type")
         });
       }
     }
 
-    var rootfolder = new this.constructor("root", {
+    var rootfolder = new this("root_folder", {
       n: "Root Folder",
       _i: items
     });
@@ -59,8 +60,8 @@ class Mock20_folder extends Mock20_object{
   getStructure(){
     var folder = this.folderObj();
     for(var item of this.Mock20_data._i){
-      if(item._type == "folder" || item._type == "playlist"){
-        var subfolder = Bank["folder"][item._id];
+      if(item._type == this.get("_type")){
+        var subfolder = Bank.get(item._type, item._id);
         if(subfolder){
           folder.i.push(subfolder.getStructure());
         }
@@ -71,7 +72,24 @@ class Mock20_folder extends Mock20_object{
     return folder;
   }
 
-  addItem(obj){
+  findItem(itemid){
+    for(var item of this.Mock20_data._i){
+      if(item._id == itemid){
+        return this.id;
+      } else if(item._type == this.get("_type")){
+        var subfolder = Bank.get(item._type, item._id);
+        var found = undefined;
+        if(subfolder){
+          found = subfolder.findItem(itemid);
+        }
+        if(found){
+          return found;
+        }
+      }
+    }
+  }
+
+  addItem(obj, beforeid){
     var newItem = {};
     if(obj instanceof Mock20_object){
       newItem._type = obj.get("_type");
@@ -79,19 +97,25 @@ class Mock20_folder extends Mock20_object{
     } else {
       newItem = obj;
     }
+    for(var i = 0; i < this.Mock20_data._i.length; i++){
+      if(this.Mock20_data._i[i]._id == beforeid){
+        this.Mock20_data._i.splice(i, 0, newItem);
+        return;
+      }
+    }
     this.Mock20_data._i.push(newItem);
   }
 
   removeItem(id){
     var homelessObjs = [];
     for(var j = 0; j < this.Mock20_data._i.length; j++){
-      if(this.Mock20_data._i[j]._type == "folder"){
-        var subfolder = Bank["folder"][this.Mock20_data._i[j]._id];
+      if(this.Mock20_data._i[j]._type == this.get("_type")){
+        var subfolder = Bank.get(this.get("_type"), this.Mock20_data._i[j]._id);
         if(this.Mock20_data._i[j]._id == id){
           homelessObjs = homelessObjs.concat(subfolder.containedObjs());
           this.Mock20_data._i.splice(j,1);
         } else {
-          homelessObjs = homelessObjs.concat(subfolder.remove(id));
+          homelessObjs = homelessObjs.concat(subfolder.removeItem(id));
         }
       } else if(this.Mock20_data._i[j]._id == id){
         this.Mock20_data._i.splice(j,1);
@@ -103,16 +127,28 @@ class Mock20_folder extends Mock20_object{
   containedObjs(){
     var objs = [];
     for(var item of this.Mock20_data._i){
-      if(item._type == "folder" || item._type == "playlist"){
-        var subfolder = Bank["folder"][item._type];
+      if(item._type == this.get("_type")){
+        var subfolder = Bank.get(item._type, item._id);
         if(subfolder){
           objs = objs.concat(subfolder.containedObjs());
         }
       } else {
-        objs.push(item._id);
+        objs.push(item);
       }
     }
     return objs;
+  }
+
+  deleteSubfolders(){
+    for(var item of this.Mock20_data._i){
+      if(item._type == this.get("_type")){
+        var subfolder = Bank.get(item._type, item._id);
+        if(subfolder){
+          subfolder.deleteSubfolders();
+          subfolder.remove({Mock20_override: true, Mock20_messyDelete: true});
+        }
+      }
+    }
   }
 
   addToJournal(journal){
@@ -124,16 +160,59 @@ class Mock20_folder extends Mock20_object{
 
   removeFromJournal(journal){
     journal = journal || "_journalfolder";
-    var rootfolder = this.getRootFolder(journal);
-    var homelessObjs = rootfolder.removeItem(this.id);
+    var rootfolder = this.constructor.getRootFolder(journal);
+    var homelessObjs = rootfolder.removeItem(this.id, true);
+    this.deleteSubfolders();
     for(var item of homelessObjs){
-      if(Bank[item._type][item._id]){
+      if(Bank.get(item._type, item._id)){
         rootfolder.addItem(item);
       }
     }
-    var newStructure = rootfolder.getStructure()._i;
-    Campaign().Mock20_update("_journalfolder", JSON.stringify(newStructure));
+    rootfolder.saveAsRoot(journal);
   }
+
+  saveAsRoot(journal){
+    journal = journal || "_journalfolder";
+    var output = "";
+    var rootArray = this.getStructure().i;
+    for(var item of rootArray){
+      if(typeof item == "object"){
+        output += JSON.stringify(item);
+      } else {
+        output += item;
+      }
+      output += ","
+    }
+    output = output.replace(/,$/,"");
+    Campaign().Mock20_update(journal, output);
+  }
+}
+
+var addQuotesToEachString = function(content){
+  var depth = 0;
+  var objectStart = undefined;
+  var objectEnd = undefined;
+  var removedObjects = [];
+  for(var i = 0; i < content.length; i++){
+    if(content[i] == "{"){
+      if(depth == 0){objectStart = i;}
+      depth++;
+    } else if(content[i] == "}"){
+      depth--;
+      if(depth == 0){
+        objectEnd = i+1;
+        removedObjects.push(content.substring(objectStart, objectEnd));
+        i -= objectEnd - objectStart;
+        content = content.substring(0, objectStart) + "$" + (removedObjects.length-1) + content.substring(objectEnd);
+      }
+    }
+  }
+  content = content.replace(/[^,]+/g, "\"$&\"");
+  content = content.replace(/\"\$(\d+)\"/g, function(match, p1, offset, string){
+    return removedObjects[Number(p1)];
+  });
+  content = content.replace(/^,/, "\"\",");
+  return content;
 }
 
 module.exports = Mock20_folder;

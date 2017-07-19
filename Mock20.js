@@ -31,3 +31,9 @@ global.setDefaultTokenForCharacter = require('./Functions/API_Utility/SetDefault
 global.spawnFx = require('./Functions/API_Utility/SpecialEffects.js').spawnFx;
 global.spawnFxBetweenPoints = require('./Functions/API_Utility/SpecialEffects.js').spawnFxBetweenPoints;
 global.spawnFxWithDefinition = require('./Functions/API_Utility/SpecialEffects.js').spawnFxWithDefinition;
+
+//Functions - Mock20 Setup
+global.Mock20_moveToFolder = require('./Functions/Mock20_Setup/FolderStructure.js').Mock20_moveToFolder;
+global.Mock20_moveBeforeFolderItem = require('./Functions/Mock20_Setup/FolderStructure.js').Mock20_moveBeforeFolderItem;
+global.Mock20_moveToPlaylist = require('./Functions/Mock20_Setup/FolderStructure.js').Mock20_moveToPlaylist;
+global.Mock20_moveBeforePlaylistItem = require('./Functions/Mock20_Setup/FolderStructure.js').Mock20_moveBeforePlaylistItem;
