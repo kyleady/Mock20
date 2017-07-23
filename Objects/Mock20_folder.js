@@ -13,36 +13,16 @@ class Mock20_folder extends Mock20_object{
     super(_id, input, data);
   }
 
-  Mock20_update(property, newValue, journal){
-    journal = journal || "_journalfolder";
+  Mock20_update(property, newValue){
     if(property != undefined && newValue != undefined){
       this.Mock20_data[property] = newValue;
     }
-    var rootfolder = this.constructor.getRootFolder(journal);
-    rootfolder.saveAsRoot(journal);
+    var rootfolder = this.constructor.getRootFolder();
+    Campaign().saveRootFolder(rootfolder);
   }
 
-  static getRootFolder(journal, type){
-    journal = journal || "_journalfolder";
-    type = type || "folder";
-    var items = [];
-    var rootInventory = JSON.parse("[" + addQuotesToEachString(Campaign().get(journal)) + "]");
-    for(var item of rootInventory){
-      if(typeof item == "object"){
-        items.push({
-          _id: item.id.toString(),
-          _type: type
-        });
-      } else {
-        var obj = findObjs({_id: item.toString()})[0];
-        if(!obj){continue;}
-        items.push({
-          _id: obj.id,
-          _type: obj.get("_type")
-        });
-      }
-    }
-
+  static getRootFolder(){
+    var items = Campaign().getFolderItems(this.name.replace("Mock20_",""));
     var rootfolder = new this("root_folder", {
       n: "Root Folder",
       _i: items
@@ -107,6 +87,10 @@ class Mock20_folder extends Mock20_object{
     this.Mock20_data._i.push(newItem);
   }
 
+  Mock20_addToJournal(){
+    return Campaign().addObjToJournal(this);
+  }
+
   removeItem(id){
     var homelessObjs = [];
     for(var j = 0; j < this.Mock20_data._i.length; j++){
@@ -152,68 +136,17 @@ class Mock20_folder extends Mock20_object{
     }
   }
 
-  addToJournal(journal){
-    journal = journal || "_journalfolder";
-    var newList = JSON.stringify(this.getStructure()) + "," + Campaign().get(journal);
-    newList = newList.replace(/,$/,"");
-    Campaign().Mock20_update(journal, newList);
-  }
-
-  removeFromJournal(journal){
-    journal = journal || "_journalfolder";
-    var rootfolder = this.constructor.getRootFolder(journal);
-    var homelessObjs = rootfolder.removeItem(this.id, true);
+  removeFromJournal(){
+    var rootfolder = this.constructor.getRootFolder();
+    var homelessObjs = rootfolder.removeItem(this.id);
     this.deleteSubfolders();
     for(var item of homelessObjs){
       if(Bank.get(item._type, item._id)){
         rootfolder.addItem(item);
       }
     }
-    rootfolder.saveAsRoot(journal);
+    Campaign().saveRootFolder(rootfolder);
   }
-
-  saveAsRoot(journal){
-    journal = journal || "_journalfolder";
-    var output = "";
-    var rootArray = this.getStructure().i;
-    for(var item of rootArray){
-      if(typeof item == "object"){
-        output += JSON.stringify(item);
-      } else {
-        output += item;
-      }
-      output += ","
-    }
-    output = output.replace(/,$/,"");
-    Campaign().Mock20_update(journal, output);
-  }
-}
-
-var addQuotesToEachString = function(content){
-  var depth = 0;
-  var objectStart = undefined;
-  var objectEnd = undefined;
-  var removedObjects = [];
-  for(var i = 0; i < content.length; i++){
-    if(content[i] == "{"){
-      if(depth == 0){objectStart = i;}
-      depth++;
-    } else if(content[i] == "}"){
-      depth--;
-      if(depth == 0){
-        objectEnd = i+1;
-        removedObjects.push(content.substring(objectStart, objectEnd));
-        i -= objectEnd - objectStart;
-        content = content.substring(0, objectStart) + "$" + (removedObjects.length-1) + content.substring(objectEnd);
-      }
-    }
-  }
-  content = content.replace(/[^,]+/g, "\"$&\"");
-  content = content.replace(/\"\$(\d+)\"/g, function(match, p1, offset, string){
-    return removedObjects[Number(p1)];
-  });
-  content = content.replace(/^,/, "\"\",");
-  return content;
 }
 
 module.exports = Mock20_folder;

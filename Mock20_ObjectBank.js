@@ -10,8 +10,7 @@ class Mock20_bank {
     var obj = new proto(id, attributes);
     var type = obj.get("_type");
     if(!this.addToPage(obj)){return;}
-    if(obj.addToJournal){obj.addToJournal();}
-    if(obj.addToJukebox){obj.addToJukebox();}
+    if(obj.Mock20_addToJournal){obj.Mock20_addToJournal();}
     this.objCounter++;
     if(this[type] == undefined){this[type] = {};}
     this[type][id] = obj;

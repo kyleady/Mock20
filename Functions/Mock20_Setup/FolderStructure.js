@@ -31,5 +31,5 @@ function moveToFolder(item, folderid, targetid, journal, type){
     var folder = rootfolder;
   }
   folder.addItem(item, targetid);
-  rootfolder.saveAsRoot(journal);
+  Campaign().saveRootFolder(rootfolder);
 }

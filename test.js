@@ -94,14 +94,14 @@ var character20 = createObj("character", {name: "character 20", controlledby: pl
 var everyman = createObj("character", {name: "everyman", controlledby: "all," + tester.id});
 sendChat("player|" + player20.id, "This is a test!");
 sendChat("The System", "/w Character Hello there, Character Name or character 20. It depends who was found first.");
-tester.chat("/w \"Character Name\" Hello there, Character Name.");
-tester.chat("/w everyman Hello there, everyone who controls everyman.");
+tester.Mock20_chat("/w \"Character Name\" Hello there, Character Name.");
+tester.Mock20_chat("/w everyman Hello there, everyone who controls everyman.");
 sendChat("character|" + character.id, "/w \"Character 20\" Hello there, player 20 through character 20.");
 sendChat("The Tester", "/em shakes his fist.");
 player20.set("speakingas", "character|" + character20.id);
-player20.chat("[[d20]] [[[[d20]]d20]]");
-player20.chat("/r D20");
-player20.chat("/gr d20");
+player20.Mock20_chat("[[d20]] [[[[d20]]d20]]");
+player20.Mock20_chat("/r D20");
+player20.Mock20_chat("/gr d20");
 
 log('==Underscore==')
 _.each(["underscore", "is", "available"], function(text){

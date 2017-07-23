@@ -15,8 +15,8 @@ class Mock20_jukeboxtrack extends Mock20_object{
     super(_id, input, data);
   }
 
-  addToJukebox(){
-    Campaign().Mock20_update("_jukeboxfolder", Campaign().get("_jukeboxfolder") + "," + this.id);
+  Mock20_addToJournal(){
+    return Campaign().addObjToJournal(this);
   }
 }
 
