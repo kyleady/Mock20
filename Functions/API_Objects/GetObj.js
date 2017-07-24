@@ -19,17 +19,18 @@ var validObjs = {
   tableitem: true,
   text: true
 };
-module.exports = function(type, id, options){
-  if(!options || typeof options != 'object'){
-    options = {};
-  }
-  if(typeof type != "string" || (!validObjs[type] && !options.Mock20_override)){
-    Mock20_warning("getObj() cannot get " + type + " objects.");
+
+module.exports = function (type, id, options) {
+  if (!options || typeof options != 'object') options = {};
+  if (typeof type != 'string' || (!validObjs[type] && !options.MOCK20override)) {
+    MOCK20warning('getObj() cannot get ' + type + ' objects.');
     return undefined;
   }
-  if(typeof id != "string"){
-    Mock20_warning(id + " is an invalid id for getObj().");
+
+  if (typeof id != 'string') {
+    MOCK20warning(id + ' is an invalid id for getObj().');
     return undefined;
   }
+
   return Bank.get(type, id);
-}
+};

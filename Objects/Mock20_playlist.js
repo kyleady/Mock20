@@ -1,25 +1,25 @@
-var Mock20_folder = require('./Mock20_folder');
-var Campaign = require("./../Functions/API_Objects/Campaign");
+var MOCK20folder = require('./Mock20_folder');
+var Campaign = require('./../Functions/API_Objects/Campaign');
 
-class Mock20_playlist extends Mock20_folder{
-  constructor(_id, input){
+class MOCK20playlist extends MOCK20folder{
+  constructor(_id, input) {
     var data = {
-      _id: "",
-      _type: "playlist",
-      n: "Playlist",
+      _id: '',
+      _type: 'playlist',
+      n: 'Playlist',
       _i: [],
-      s: "s"
+      s: 's'
     }
     super(_id, input, data);
   }
-  folderObj(){
+  folderObj() {
     return {
-      n: this.Mock20_data.n,
+      n: this.MOCK20data.n,
       i: [],
-      id: this.Mock20_data._id,
-      s: this.Mock20_data.s
+      id: this.MOCK20data._id,
+      s: this.MOCK20data.s
     };
   }
 }
 
-module.exports = Mock20_playlist;
+module.exports = MOCK20playlist;

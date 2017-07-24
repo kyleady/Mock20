@@ -19,6 +19,6 @@ var names = [
   'text'
 ];
 
-for(var name of names){
+for (var name of names) {
   module.exports[name] = require('./Objects/Mock20_' + name);
 }

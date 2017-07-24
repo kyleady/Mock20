@@ -1,12 +1,12 @@
-var Mock20_object = require('./Mock20_object');
+var MOCK20object = require('./Mock20_object');
 
-class Mock20_page extends Mock20_object{
-  constructor(_id, input){
+class MOCK20page extends MOCK20object{
+  constructor(_id, input) {
     var data = {
-      _id: "",
-      _type: "page",
-      _zorder: "",
-      name: "",
+      _id: '',
+      _type: 'page',
+      _zorder: '',
+      name: '',
       showgrid: true,
       showdarkness: false,
       showlighting: false,
@@ -15,21 +15,21 @@ class Mock20_page extends Mock20_object{
       snapping_increment: 1,
       grid_opacity: 0.5,
       fog_opacity: 0.35,
-      background_color: "#FFFFFF",
-      gridcolor: "#C0C0C0",
-      grid_type: "square",
+      background_color: '#FFFFFF',
+      gridcolor: '#C0C0C0',
+      grid_type: 'square',
       scale_number: 5,
-      scale_units: "ft",
+      scale_units: 'ft',
       gridlabels: false,
-      diagonaltype: "foure",
+      diagonaltype: 'foure',
       archived: false,
       lightupdatedrop: false,
       lightenforcelos: false,
       lightrestrictmove: false,
       lightglobalilim: false
-    }
+    };
     super(_id, input, data);
   }
 }
 
-module.exports = Mock20_page;
+module.exports = MOCK20page;

@@ -1,11 +1,11 @@
-global.Mock20_warning = function(msg, options){
-  Mock20_log(msg, options, "WARNING");
-}
+global.MOCK20warning = function (msg, options) {
+  MOCK20log(msg, options, 'WARNING');
+};
 
-global.Mock20_log = function(msg, options, speakingAs){
-  if(speakingAs){
-    console.log(speakingAs + ": " + msg);
+global.MOCK20log = function (msg, options, speakingAs) {
+  if (speakingAs) {
+    console.log(speakingAs + ': ' + msg);
   } else {
     console.log(msg);
   }
-}
+};

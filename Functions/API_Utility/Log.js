@@ -1,7 +1,8 @@
-require("./../../Mock20_Output");
-module.exports = function(msg){
-  if(typeof msg == 'object' && typeof msg.Mock20_data == 'object'){
-    msg = JSON.stringify(msg.Mock20_data);
+require('./../../Mock20_Output');
+module.exports = function (msg) {
+  if (typeof msg == 'object' && typeof msg.MOCK20data == 'object') {
+    msg = JSON.stringify(msg.MOCK20data);
   }
-  Mock20_log(msg);
-}
+
+  MOCK20log(msg);
+};

@@ -1,23 +1,23 @@
-var Mock20_object = require('./Mock20_object');
-var Campaign = require("./../Functions/API_Objects/Campaign");
+var MOCK20object = require('./Mock20_object');
+var Campaign = require('./../Functions/API_Objects/Campaign');
 
-class Mock20_jukeboxtrack extends Mock20_object{
-  constructor(_id, input){
+class MOCK20jukeboxtrack extends MOCK20object{
+  constructor(_id, input) {
     var data = {
-      _id: "",
-      _type: "jukeboxtrack",
+      _id: '',
+      _type: 'jukeboxtrack',
       playing: false,
       softstop: false,
-      title: "",
+      title: '',
       volume: 30,
       loop: false
-    }
+    };
     super(_id, input, data);
   }
 
-  Mock20_addToJournal(){
+  MOCK20addToJournal() {
     return Campaign().addObjToJournal(this);
   }
 }
 
-module.exports = Mock20_jukeboxtrack;
+module.exports = MOCK20jukeboxtrack;

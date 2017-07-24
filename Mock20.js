@@ -10,9 +10,9 @@ global.state = {};
 
 //Functions - API:Events
 global.on = require('./Functions/API_Events/On');
-global.Mock20_endOfLastScript = function(){
-  Mock20_trigger("ready");
-}
+global.MOCK20endOfLastScript = function () {
+  MOCK20trigger('ready');
+};
 
 //Functions - API:Chat
 global.sendChat = require('./Functions/API_Chat/SendChat');
@@ -27,14 +27,21 @@ global.toBack = require('./Functions/API_Utility/ObjectOrdering.js').toBack;
 global.playerIsGM = require('./Functions/API_Utility/PlayerIsGM.js');
 global.randomInteger = require('./Functions/API_Utility/RandomInteger.js');
 global.sendPing = require('./Functions/API_Utility/SendPing.js');
-global.setDefaultTokenForCharacter = require('./Functions/API_Utility/SetDefaultTokenForCharacter.js');
+global.setDefaultTokenForCharacter
+ = require('./Functions/API_Utility/SetDefaultTokenForCharacter.js');
 global.spawnFx = require('./Functions/API_Utility/SpecialEffects.js').spawnFx;
-global.spawnFxBetweenPoints = require('./Functions/API_Utility/SpecialEffects.js').spawnFxBetweenPoints;
-global.spawnFxWithDefinition = require('./Functions/API_Utility/SpecialEffects.js').spawnFxWithDefinition;
+global.spawnFxBetweenPoints
+ = require('./Functions/API_Utility/SpecialEffects.js').spawnFxBetweenPoints;
+global.spawnFxWithDefinition
+ = require('./Functions/API_Utility/SpecialEffects.js').spawnFxWithDefinition;
 
 //Functions - Mock20 Setup
-global.Mock20_moveToFolder = require('./Functions/Mock20_Setup/FolderStructure.js').Mock20_moveToFolder;
-global.Mock20_moveBeforeFolderItem = require('./Functions/Mock20_Setup/FolderStructure.js').Mock20_moveBeforeFolderItem;
-global.Mock20_moveToPlaylist = require('./Functions/Mock20_Setup/FolderStructure.js').Mock20_moveToPlaylist;
-global.Mock20_moveBeforePlaylistItem = require('./Functions/Mock20_Setup/FolderStructure.js').Mock20_moveBeforePlaylistItem;
-global.Mock20_sortFolder = require('./Functions/Mock20_Setup/SortFolder.js');
+global.MOCK20moveToFolder
+ = require('./Functions/Mock20_Setup/FolderStructure.js').MOCK20moveToFolder;
+global.MOCK20moveBeforeFolderItem
+ = require('./Functions/Mock20_Setup/FolderStructure.js').MOCK20moveBeforeFolderItem;
+global.MOCK20moveToPlaylist
+ = require('./Functions/Mock20_Setup/FolderStructure.js').MOCK20moveToPlaylist;
+global.MOCK20moveBeforePlaylistItem
+ = require('./Functions/Mock20_Setup/FolderStructure.js').MOCK20moveBeforePlaylistItem;
+global.MOCK20sortFolder = require('./Functions/Mock20_Setup/SortFolder.js');

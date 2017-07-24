@@ -1,1 +1,3 @@
-module.exports = function(left, top, pageid, playerid, moveAll){}
+module.exports = function (left, top, pageid, playerid, moveAll) {
+
+};

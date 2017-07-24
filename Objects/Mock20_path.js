@@ -1,16 +1,16 @@
-var Mock20_object = require('./Mock20_object');
+var MOCK20object = require('./Mock20_object');
 
-class Mock20_path extends Mock20_object{
-  constructor(_id, input){
+class MOCK20path extends MOCK20object{
+  constructor(_id, input) {
     var data = {
-      _id: "",
-      _type: "path",
-      _pageid: "",
+      _id: '',
+      _type: 'path',
+      _pageid: '',
       _path: {},
-      fill: "transparent",
-      stroke: "#000000",
+      fill: 'transparent',
+      stroke: '#000000',
       rotation: 0,
-      layer: "",
+      layer: '',
       stroke_width: 5,
       width: 0,
       height: 0,
@@ -18,10 +18,10 @@ class Mock20_path extends Mock20_object{
       left: 0,
       scaleX: 1,
       scaleY: 1,
-      controlledby: ""
-    }
+      controlledby: ''
+    };
     super(_id, input, data);
   }
 }
 
-module.exports = Mock20_path;
+module.exports = MOCK20path;

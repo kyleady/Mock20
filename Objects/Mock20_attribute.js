@@ -1,17 +1,17 @@
-var Mock20_object = require('./Mock20_object');
+var MOCK20object = require('./Mock20_object');
 
-class Mock20_attribute extends Mock20_object{
-  constructor(_id, input){
+class MOCK20attribute extends MOCK20object{
+  constructor(_id, input) {
     var data = {
-      _id: "",
-      _type: "attribute",
-      _characterid: "",
-      name: "Untitled",
-      current: "",
-      max: ""
-    }
+      _id: '',
+      _type: 'attribute',
+      _characterid: '',
+      name: 'Untitled',
+      current: '',
+      max: ''
+    };
     super(_id, input, data);
   }
 }
 
-module.exports = Mock20_attribute;
+module.exports = MOCK20attribute;

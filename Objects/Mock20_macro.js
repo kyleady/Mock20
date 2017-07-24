@@ -1,18 +1,18 @@
-var Mock20_object = require('./Mock20_object');
+var MOCK20object = require('./Mock20_object');
 
-class Mock20_macro extends Mock20_object{
-  constructor(_id, input){
+class MOCK20macro extends MOCK20object{
+  constructor(_id, input) {
     var data = {
-      _id: "",
-      _type: "macro",
-      _playerid: "",
-      name: "",
-      action: "",
-      visibleto: "",
+      _id: '',
+      _type: 'macro',
+      _playerid: '',
+      name: '',
+      action: '',
+      visibleto: '',
       istokenaction: false
-    }
+    };
     super(_id, input, data);
   }
 }
 
-module.exports = Mock20_macro;
+module.exports = MOCK20macro;

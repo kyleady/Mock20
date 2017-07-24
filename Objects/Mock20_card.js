@@ -1,16 +1,16 @@
-var Mock20_object = require('./Mock20_object');
+var MOCK20object = require('./Mock20_object');
 
-class Mock20_card extends Mock20_object{
-  constructor(_id, input){
+class MOCK20card extends MOCK20object{
+  constructor(_id, input) {
     var data = {
-      name: "",
-      avatar: "",
-      _deckid: "",
-      _type: "card",
-      _id: ""
-    }
+      name: '',
+      avatar: '',
+      _deckid: '',
+      _type: 'card',
+      _id: ''
+    };
     super(_id, input, data);
   }
 }
 
-module.exports = Mock20_card;
+module.exports = MOCK20card;
