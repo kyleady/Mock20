@@ -1,3 +1,4 @@
+require('./../../Mock20_Output');
 module.exports = function (max) {
   if (typeof max != 'number' || max < 1) {
     MOCK20warning('randomInteger() requires a valid number.');

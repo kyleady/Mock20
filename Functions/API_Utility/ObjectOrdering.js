@@ -1,3 +1,6 @@
+var getObj = require('./../API_Objects/GetObj');
+var findObjs = require('./../API_Objects/FindObjs');
+require('./../../Mock20_Output');
 module.exports.toFront = function (obj) {
   reorderObjs(obj, 'toFront');
 };
@@ -8,7 +11,7 @@ module.exports.toBack = function (obj) {
 
 function reorderObjs(obj, action) {
   if (typeof obj != 'object' || obj.get('_pageid') == undefined) {
-    return MOCK20warning(action + '() received an invalid obj.');
+    return MOCK20warning(action + '() received an invalid obj. Roll20 crashes here.');
   }
 
   var page = getObj('page', obj.get('_pageid'));
