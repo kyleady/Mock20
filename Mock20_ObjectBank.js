@@ -38,12 +38,13 @@ class MOCK20bank {
 
   addToPage(obj) {
     if (obj.MOCK20data._pageid != undefined) {
-      var page = this.page[obj.get('_pageid')];
+      if(obj && obj.get('_pageid')){
+        var page = this.page[obj.get('_pageid')];
+      }
       if (!page) {
-        MOCK20warning('Invalid page id for ' + type);
+        MOCK20warning('Invalid page id.');
         return false;
       }
-
       page.MOCK20update('_zorder', page.get('_zorder') + ',' + obj.id);
     }
 

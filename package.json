@@ -1,0 +1,30 @@
+{
+  "name": "mock20",
+  "version": "1.0.0",
+  "description": "A Roll20 nodejs mocker.",
+  "main": "index.js",
+  "dependencies": {
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "mocha": "^3.5.0"
+  },
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyleady/Mock20.git"
+  },
+  "keywords": [
+    "Roll20",
+    "mocker"
+  ],
+  "author": "Kyle Smith <kyledavidady@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kyleady/Mock20/issues"
+  },
+  "homepage": "https://github.com/kyleady/Mock20#readme"
+}

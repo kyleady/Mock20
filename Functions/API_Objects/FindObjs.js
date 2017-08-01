@@ -19,7 +19,7 @@ module.exports = function (attrs, options) {
     types[attrs._type] = true;
   } else {
     for (var type in Bank) {
-      if (type == 'folder' && !options.MOCK20override) continue;
+      if ((type == 'folder' || type == 'playlist') && !options.MOCK20override) continue;
       types[type] = true;
     }
   }

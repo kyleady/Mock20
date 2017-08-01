@@ -10,7 +10,7 @@ module.exports = function (testFunc, options) {
 
   var Found = [];
   for (var type in Bank) {
-    if (type == 'folder' && !options.MOCK20override) continue;
+    if ((type == 'folder' || type == 'playlist') && !options.MOCK20override) continue;
     for (var id in Bank[type]) {
       if (testFunc(Bank[type][id])) Found.push(Bank[type][id]);
     }

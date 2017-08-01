@@ -1,4 +1,4 @@
-require('./Mock20');
+require('./index');
 
 log('==Create Objects==');
 var page = createObj('page', { name: '1st Page' }, { MOCK20override: true });

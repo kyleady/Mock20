@@ -17,7 +17,7 @@ var validObjs = {
 
 module.exports = function (type, attributes, options) {
   if (!options || typeof options != 'object') options = {};
-  if (typeof type != 'string' || (!validObjs[type] && !options.MOCK20override)) {
+  if (typeof type != 'string' || (!validObjs[type] && !options.MOCK20override) || !Objects[type]) {
     return MOCK20warning('creatObj() cannot create ' + type + ' objects.');
   }
 
