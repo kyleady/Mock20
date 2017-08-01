@@ -54,6 +54,19 @@ describe('sendChat()', function(){
       sendChat('Mock20', '[[[[0]]3+[[[[1]]2]]]] [[[[4]]5]]');
       expect(msg.content).to.equal('$[[3]] $[[5]]');
     });
+    it('should store the contents of the inline rolls in msg.inlinerolls', function(){
+      sendChat('Mock20', '[[[[0]]3+[[[[1]]2]]]] [[[[4]]5]]');
+      expect(msg.inlinerolls).to.have.lengthOf(6);
+    });
+    it('should trigger on(\"chat:message\", func)', function(){
+      var messagesent = false;
+      on('chat:message', function(msg){
+        messagesent = true;
+      });
+      expect(messagesent).to.equal(false);
+      sendChat('Mock20', '[[[[0]]3+[[[[1]]2]]]] [[[[4]]5]]');
+      expect(messagesent).to.equal(true);
+    });
   });
   describe('type:rollresult', function(){
     it('should make a rollresult msg when starting with /r', function(){

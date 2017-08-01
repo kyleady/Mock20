@@ -90,9 +90,9 @@ class MOCK20msg{
         var oldContent = this.content;
         this.content = oldContent.substring(0, inlineroll.start);
         this.content += '$[[' + counter + ']]';
-        this.content + oldContent.substring(inlineroll.end + 1);
+        this.content += oldContent.substring(inlineroll.end+1);
         this.inlinerolls = this.inlinerolls || [];
-        this.inlinerolls.push(inlineroll);
+        this.inlinerolls.push(inlineroll.text);
         counter++;
       } else {
         break;
@@ -136,14 +136,16 @@ function findObjCI(type, name, firstWordOnly) {
 }
 
 function getDeepestInline(content) {
-  var inline = {};
-  var re = /\[\[[^\]\[]+\]\]/;
+  var inline = undefined;
   content = content.replace(/\$\[\[(\d+)\]\]/g, '$$(($1))');
-  inline.start = content.search(re);
-  if (inline.start == -1) return undefined;
-  inline.text = content.match(re)[0];
-  inline.text = inline.text.replace(/\$\(\((\d+)\)\)/g, '$$[[$1]]');
-  inline.end = inline.start + inline.text.length - 1;
+  content.replace(/\[\[([^\]\[]+)\]\]/, function(match, p1, offset, string){
+    inline = {
+      start: offset,
+      text: p1,
+      end: offset + p1.length + 3
+    }
+    inline.text = inline.text.replace(/\$\(\((\d+)\)\)/g, '$$[[$1]]');
+  });
   return inline;
 }
 
