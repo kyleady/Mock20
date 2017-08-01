@@ -19,9 +19,10 @@ class MOCK20player extends MOCK20object{
     this.MOCK20gm = MOCK20gm == true;
   }
 
-  MOCK20chat(msg) {
+  MOCK20chat(msg, options) {
     var who = this.get('speakingas') || this.get('_displayname');
-    var options = { MOCK20playerid: this.id };
+    var options = options || {};
+    options.MOCK20playerid = this.id;
     sendChat(who, msg, null, options);
   }
 }

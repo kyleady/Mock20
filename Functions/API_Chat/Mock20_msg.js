@@ -1,8 +1,11 @@
+var getObj = require('./../API_Objects/GetObj');
+var filterObjs = require('./../API_Objects/FilterObjs');
 class MOCK20msg{
   constructor(speakingAs, input, options) {
     options = options || {};
     this.parseSpeaker(speakingAs, options);
     this.parseInput(input);
+    if(this.type == "api" && options.MOCK20selected) this.selected = options.MOCK20selected;
   }
 
   parseSpeaker(speakingAs, options) {
@@ -18,7 +21,7 @@ class MOCK20msg{
 
     if (!this.who) this.who = speakingAs;
     this.playerid = 'API';
-    if (options.playerid) this.playerid = options.playerid;
+    if (options.MOCK20playerid) this.playerid = options.MOCK20playerid;
   }
 
   parseInput(input) {
@@ -33,7 +36,7 @@ class MOCK20msg{
   getType() {
     if (/^!/.test(this.content)) {
       this.type = 'api';
-    } else if (/^\/em /.test(this.content)) {
+    } else if (/^\/(em|me) /.test(this.content)) {
       this.type = 'emote';
     } else if (/^\/r(oll)? /i.test(this.content)) {
       this.type = 'rollresult';
@@ -53,7 +56,7 @@ class MOCK20msg{
   }
 
   getTarget() {
-    var re = /^\s*'([^']+)'\s/;
+    var re = /^\s*"([^"]+)"\s/;
     var matches = this.content.match(re);
     var target = undefined;
     if (matches) {
@@ -66,7 +69,7 @@ class MOCK20msg{
 
     if (!target) return this.type = undefined;
     this.content = this.content.replace(re, '');
-    if (target.get('_type') == 'character' && target.get('controlledby') == '') target = 'gm';
+    if (typeof target == 'object' && target.get('_type') == 'character' && target.get('controlledby') == '') target = 'gm';
     if (typeof target == 'string' && target == 'gm') {
       this.target = 'gm';
       this.target_name = 'GM';
