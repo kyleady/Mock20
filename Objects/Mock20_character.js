@@ -20,9 +20,10 @@ class MOCK20character extends MOCK20object{
 
   get(property, callBack) {
     if (property == 'bio' || property == 'gmnotes' || property == 'notes') {
+      var notes = this.MOCK20data[property];
       setTimeout(function () {
-        callBack(this.MOCK20data[property]);
-      }, 1000);
+        callBack(notes);
+      }, 100);
     } else {
       return super.get(property);
     }

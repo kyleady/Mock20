@@ -9,4 +9,12 @@ describe('playerIsGM()', function(){
     expect(playerIsGM(player1.id)).to.equal(false);
     expect(playerIsGM(player2.id)).to.equal(true);
   });
+  it('should return undefined if the player does not exist', function(){
+    var player = createObj('player', {}, {MOCK20override: true});
+    player.remove({MOCK20override: true});
+    expect(playerIsGM(player.id)).to.be.undefined;
+    expect(playerIsGM(undefined)).to.be.undefined;
+    expect(playerIsGM(3492384239)).to.be.undefined;
+    expect(playerIsGM({})).to.be.undefined;
+  });
 });

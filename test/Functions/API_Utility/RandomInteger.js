@@ -15,4 +15,10 @@ describe('randomInteger()', function(){
       expect(rolls[i]).to.be.below(102158);
     }
   });
+  it('should return undefined if given invalid input', function(){
+    expect(randomInteger('10')).to.be.undefined;
+    expect(randomInteger([2,3])).to.be.undefined;
+    expect(randomInteger(0.3)).to.be.undefined;
+    expect(randomInteger(undefined)).to.be.undefined;
+  });
 });

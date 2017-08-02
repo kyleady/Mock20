@@ -90,4 +90,13 @@ describe('on()', function(){
       'change'
     ]);
   });
+  it('should deliver a prev obj copying all of the properties before the change event', function(){
+    var character = createObj('character', {name: 'Trev'});
+    on('change:character:name', function(obj, prev){
+      expect(prev.name).to.equal(prev.get('name'));
+      prev.set('name', 'Trev');
+    });
+    character.set('name', 'Trevor');
+    expect(character.get('name')).to.not.equal('Trev');
+  });
 });

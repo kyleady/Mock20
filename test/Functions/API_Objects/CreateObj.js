@@ -51,4 +51,7 @@ describe('createObj()', function(){
     var newObj = createObj('completely madeup', {}, {MOCK20override: true});
     expect(newObj).to.be.an('undefined');
   });
+  it('should not create an object if invalid attributes are given', function(){
+    expect(createObj('handout', 'The best handout')).to.be.undefined;
+  });
 });

@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for Mock20/Functions/Mock20_Setup/FolderStructure.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">Mock20/Functions/Mock20_Setup</a> FolderStructure.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>34/34</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>29/29</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>5/5</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>29/29</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">35x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">53x</span>
+<span class="cline-any cline-yes">53x</span>
+<span class="cline-any cline-yes">53x</span>
+<span class="cline-any cline-yes">53x</span>
+<span class="cline-any cline-yes">50x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">47x</span>
+<span class="cline-any cline-yes">47x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">39x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-yes">41x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">37x</span>
+<span class="cline-any cline-yes">37x</span>
+<span class="cline-any cline-yes">37x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var MOCK20folder = require('./../../Objects/Mock20_folder');
+var MOCK20playlist = require('./../../Objects/Mock20_playlist');
+var Bank = require('./../../Mock20_ObjectBank');
+var Campaign = require('./../API_Objects/Campaign');
+require('./../../Mock20_Output');
+module.exports.MOCK20moveToFolder = function (item, folderid) {
+  moveToFolder(item, folderid, undefined);
+};
+&nbsp;
+module.exports.MOCK20moveBeforeFolderItem = function (item, targetid) {
+  moveToFolder(item, undefined, targetid);
+};
+&nbsp;
+module.exports.MOCK20moveToPlaylist = function (item, folderid) {
+  moveToFolder(item, folderid, undefined, '_jukeboxfolder', 'playlist');
+};
+&nbsp;
+module.exports.MOCK20moveBeforePlaylistItem = function (item, targetid) {
+  moveToFolder(item, undefined, targetid, '_jukeboxfolder', 'playlist');
+};
+&nbsp;
+function moveToFolder(item, folderid, targetid, journal, type) {
+  type = type || 'folder';
+  var proto = (type == 'folder') ? MOCK20folder : MOCK20playlist;
+  var rootfolder = proto.getRootFolder();
+  if(typeof item != 'object' || !item.MOCK20addToJournal) return MOCK20warning('moveToFolder: invalid item');
+  if(item.id == targetid) return;
+&nbsp;
+  if (!folderid &amp;&amp; targetid) folderid = rootfolder.findItem(targetid);
+  if (folderid == 'root_folder') {
+    var folder = rootfolder;
+  } else {
+    if(!folderid || !Bank.get(type, folderid)) return MOCK20warning('moveToFolder: invalid folder');
+    var folder = Bank.get(type, folderid);
+  }
+  if(item.get('_type') == 'playlist' &amp;&amp; folder.id != 'root_folder') return MOCK20warning('moveToFolder: cannot move a playlist inside of a playlist');
+  if(item.get('_type') == type
+  &amp;&amp; (item.id == folder.id || item.findItem(folder.id))) return MOCK20warning('moveToFolder: cannot move a folder into itself');
+  rootfolder.removeItem(item.id);
+  folder.addItem(item, targetid);
+  Campaign().saveRootFolder(rootfolder);
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Aug 02 2017 16:31:09 GMT-0700 (DST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

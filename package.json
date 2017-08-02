@@ -8,10 +8,12 @@
   },
   "devDependencies": {
     "chai": "^4.1.0",
-    "mocha": "^3.5.0"
+    "mocha": "^3.5.0",
+    "nyc": "^11.1.0"
   },
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "coverage": "nyc --reporter=html mocha --recursive"
   },
   "repository": {
     "type": "git",

@@ -23,7 +23,7 @@ module.exports = function (type, attributes, options) {
 
   if (attributes && typeof attributes != 'object') {
     MOCK20warning('Invalid attributes for creatObj(\"' + type + '\").');
-    attributes = {};
+    return;
   }
 
   return Bank.create(Objects[type], attributes);

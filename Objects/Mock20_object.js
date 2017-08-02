@@ -105,8 +105,6 @@ class MOCK20object{
       MOCK20warning('Cannot remove ' + this.get('_type') + ' objects.');
       return;
     }
-
-    MOCK20trigger('destroy:' + this.get('_type'), this);
     Bank.remove(this.get('_type'), this.id, options);
   }
 }

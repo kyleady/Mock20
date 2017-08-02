@@ -25,14 +25,12 @@ class MOCK20bank {
   }
 
   remove(type, id, options) {
-    options = options || { MOCK20messyDelete: false };
     if (!this[type] || !this[type][id]) return;
     var obj = this[type][id];
     if (!options.MOCK20messyDelete) {
       if (obj.removeFromJournal) obj.removeFromJournal();
-      if (obj.removeFromJukebox) obj.removeFromJukebox();
     }
-
+    MOCK20trigger('destroy:' + type, obj);
     delete this[type][id];
   }
 
@@ -49,26 +47,6 @@ class MOCK20bank {
     }
 
     return true;
-  }
-
-  removeFromPage(obj) {
-    if (obj.MOCK20data._pageid != undefined) {
-      var page = this.page[obj.get('_pageid')];
-      if (!page) {
-        MOCK20warning('Invalid page id for ' + type);
-        return false;
-      }
-
-      var zorder = page.get('_zorder').split(',');
-      for (var i = 0; i < zorder.length; i++) {
-        if (zorder[i] == obj.id) {
-          zorder.splice(i, 1);
-          i--;
-        }
-      }
-
-      page.MOCK20update('_zorder', zorder.join());
-    }
   }
 };
 

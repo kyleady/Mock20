@@ -2,6 +2,7 @@ var expect = require('chai').expect;
 var toFront = require('./../../../Functions/API_Utility/ObjectOrdering').toFront;
 var toBack = require('./../../../Functions/API_Utility/ObjectOrdering').toBack;
 var createObj = require('./../../../Functions/API_Objects/CreateObj');
+var on = require('./../../../Functions/API_Events/On');
 describe('Object Ordering', function(){
   it('should use toFront() and toBack() to change the _zorder of objects', function(){
     var page = createObj('page', {name: 'ObjectOrdering test page'}, {MOCK20override: true});
@@ -24,5 +25,24 @@ describe('Object Ordering', function(){
     var page = createObj('page', {name: 'ObjectOrdering test page'}, {MOCK20override: true});
     toFront(page);
     toBack(page);
+  });
+  it('should do nothing if used on an object on an invalid page', function(){
+    var page = createObj('page', {name: 'ObjectOrdering test page'}, {MOCK20override: true});
+    var page2 = createObj('page', {name: 'ObjectOrdering test page'}, {MOCK20override: true});
+    var graphic = createObj('graphic', {name: 'ObjectOrdering test graphic', _pageid: page.id});
+    var graphic2 = createObj('graphic', {name: 'ObjectOrdering test graphic', _pageid: page2.id});
+    page.remove({MOCK20override: true});
+    var changePageZOrderDetected = false;
+    on('change:page:_zorder', function(){
+      changePageZOrderDetected = true;
+    });
+    expect(changePageZOrderDetected).to.equal(false);
+    toFront(graphic);
+    expect(changePageZOrderDetected).to.equal(false);
+    toBack(graphic);
+    expect(changePageZOrderDetected).to.equal(false);
+    toFront(graphic2);
+    expect(changePageZOrderDetected).to.equal(true);
+
   });
 });
