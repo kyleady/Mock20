@@ -28,10 +28,8 @@ describe('on()', function(){
     character.set('name', "On(\"change:ability\") test");
     expect(changeAbilityDetected).to.be.empty;
     ability.set('name', 'only trigger change:ability');
-    expect(changeAbilityDetected).to.have.lengthOf(2);
     expect(changeAbilityDetected).to.have.ordered.members(['ability1', 'ability2']);
     ability.set('description', 'will trigger change:ability:description first');
-    expect(changeAbilityDetected).to.have.lengthOf(5);
     expect(changeAbilityDetected).to.have.ordered.members([
       'ability1',
       'ability2',
@@ -78,7 +76,6 @@ describe('on()', function(){
     graphic.set('left', 10);
     graphic.set('rotation', 13);
     graphic.remove();
-    expect(graphicTriggersDetected).to.have.lengthOf(11);
     expect(graphicTriggersDetected).to.have.ordered.members([
       'add',
       'change',

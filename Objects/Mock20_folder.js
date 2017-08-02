@@ -14,7 +14,7 @@ class MOCK20folder extends MOCK20object{
   }
 
   MOCK20update(property, newValue) {
-    if (property != undefined && newValue != undefined) this.MOCK20data[property] = newValue;
+    super.MOCK20update(property, newValue);
     var rootfolder = this.constructor.getRootFolder();
     Campaign().saveRootFolder(rootfolder);
   }

@@ -1,5 +1,5 @@
 global.MOCK20warning = function (msg, options) {
-  if(false){
+  if(true){
     MOCK20log(msg, options, 'WARNING');
   }
 };

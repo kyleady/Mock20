@@ -1,5 +1,5 @@
 var MOCK20object = require('./Mock20_object');
-
+var findObjs = require('./../Functions/API_Objects/FindObjs');
 class MOCK20campaign extends MOCK20object{
   constructor(_id, input) {
     var data = {

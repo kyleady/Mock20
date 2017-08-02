@@ -3,6 +3,7 @@ var MOCK20playlist = require('./../../Objects/Mock20_playlist');
 var Bank = require('./../../Mock20_ObjectBank');
 
 module.exports = function (folder) {
+  if (folder instanceof MOCK20folder == false) return;
   var objs = [];
   for (var item of folder.get('_i')) {
     var obj = Bank.get(item._type, item._id);
