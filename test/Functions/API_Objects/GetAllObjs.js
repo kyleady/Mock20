@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
-var filterObjs = require('./../../Functions/API_Objects/FilterObjs');
-var getAllObjs = require('./../../Functions/API_Objects/GetAllObjs');
-var createObj = require('./../../Functions/API_Objects/CreateObj');
+var filterObjs = require('./../../../Functions/API_Objects/FilterObjs');
+var getAllObjs = require('./../../../Functions/API_Objects/GetAllObjs');
+var createObj = require('./../../../Functions/API_Objects/CreateObj');
 describe('getAllObjs()', function(){
   it('should behave identically to filterObjs(function(){return true;})', function(){
     var page = createObj('page', {name: "everything"}, {MOCK20override: true});

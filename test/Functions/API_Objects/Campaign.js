@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var Campaign = require('./../../Functions/API_Objects/Campaign');
+var Campaign = require('./../../../Functions/API_Objects/Campaign');
 describe('Campaign()', function(){
   it('should have the root id', function(){
     expect(Campaign().id).to.equal('root');

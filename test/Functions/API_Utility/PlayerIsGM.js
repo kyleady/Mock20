@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
-var playerIsGM = require('./../../Functions/API_Utility/PlayerIsGM');
-var createObj = require('./../../Functions/API_Objects/CreateObj');
+var playerIsGM = require('./../../../Functions/API_Utility/PlayerIsGM');
+var createObj = require('./../../../Functions/API_Objects/CreateObj');
 describe('playerIsGM()', function(){
   it('should detect if player.MOCK20gm is true', function(){
     var player1 = createObj('player', {}, {MOCK20override: true});

@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
-var on = require('./../../Functions/API_Events/On');
-var createObj = require('./../../Functions/API_Objects/CreateObj');
-var sendChat = require('./../../Functions/API_Chat/SendChat');
+var on = require('./../../../Functions/API_Events/On');
+var createObj = require('./../../../Functions/API_Objects/CreateObj');
+var sendChat = require('./../../../Functions/API_Chat/SendChat');
 describe('sendChat()', function(){
   var msg = {};
   on('chat:message', function(message){

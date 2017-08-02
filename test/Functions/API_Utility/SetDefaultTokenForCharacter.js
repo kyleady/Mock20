@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
-var setDefaultTokenForCharacter = require('./../../Functions/API_Utility/SetDefaultTokenForCharacter');
-var createObj = require('./../../Functions/API_Objects/CreateObj');
+var setDefaultTokenForCharacter = require('./../../../Functions/API_Utility/SetDefaultTokenForCharacter');
+var createObj = require('./../../../Functions/API_Objects/CreateObj');
 describe('setDefaultTokenForCharacter()', function(){
   it('should store the token\'s data as a JSON within the character\'s _defaulttoken', function(){
     var character = createObj('character', {});

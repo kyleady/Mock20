@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
-var on = require('./../../Functions/API_Events/On');
-var createObj = require('./../../Functions/API_Objects/CreateObj');
+var on = require('./../../../Functions/API_Events/On');
+var createObj = require('./../../../Functions/API_Objects/CreateObj');
 describe('on()', function(){
   it('should react to new objects', function(){
     var addHandoutDetected = false;

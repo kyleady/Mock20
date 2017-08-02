@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
-var filterObjs = require('./../../Functions/API_Objects/FilterObjs');
-var createObj = require('./../../Functions/API_Objects/CreateObj');
+var filterObjs = require('./../../../Functions/API_Objects/FilterObjs');
+var createObj = require('./../../../Functions/API_Objects/CreateObj');
 describe('filterObjs()', function(){
   var page = createObj('page', {name: "filterObjTest page"}, {MOCK20override: true});
   var player = createObj('player', {_displayname: "filterObjTest player"}, {MOCK20override: true});
