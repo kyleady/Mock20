@@ -1,7 +1,5 @@
 global.MOCK20warning = function (msg, options) {
-  if(true){
-    MOCK20log(msg, options, 'WARNING');
-  }
+  MOCK20log(msg, options, 'WARNING');
 };
 
 global.MOCK20log = function (msg, options, speakingAs) {

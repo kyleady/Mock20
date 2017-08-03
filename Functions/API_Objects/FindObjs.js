@@ -1,5 +1,5 @@
 //see https://wiki.roll20.net/API:Objects#findObjs.28attrs.29
-var Bank = require('./../../Mock20_ObjectBank');
+var Bank = require('./../../Objects/Mock20_ObjectBank');
 require('./../../Mock20_Output');
 module.exports = function (attrs, options) {
   if (typeof attrs != 'object') return MOCK20warning('Invalid attrs for findObjs()');

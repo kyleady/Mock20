@@ -1,4 +1,4 @@
-var Bank = require('./../Mock20_ObjectBank');
+var Bank = require('./../Objects/Mock20_ObjectBank');
 var Campaign = require('./../Functions/API_Objects/Campaign');
 var MOCK20object = require('./Mock20_object');
 

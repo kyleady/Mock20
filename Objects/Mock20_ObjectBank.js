@@ -1,4 +1,4 @@
-require('./Functions/API_Events/On');
+require('./../Functions/API_Events/On');
 
 class MOCK20bank {
   constructor() {

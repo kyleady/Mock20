@@ -1,6 +1,6 @@
 //see https://wiki.roll20.net/API:Objects#Creating_Objects
-var Bank = require('./../../Mock20_ObjectBank');
-var Objects = require('./../../Mock20_Objects');
+var Bank = require('./../../Objects/Mock20_ObjectBank');
+var Objects = require('./../../Objects/Mock20_Objects');
 require('./../../Mock20_Output');
 var validObjs = {
   graphic: true,

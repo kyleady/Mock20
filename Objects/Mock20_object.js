@@ -1,6 +1,6 @@
 require('./../Mock20_Output');
 require('./../Functions/API_Events/On');
-var Bank = require('./../Mock20_ObjectBank');
+var Bank = require('./../Objects/Mock20_ObjectBank');
 var canRemove = {
   graphic: true,
   text: true,

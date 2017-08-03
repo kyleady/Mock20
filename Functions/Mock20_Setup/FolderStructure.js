@@ -1,6 +1,6 @@
 var MOCK20folder = require('./../../Objects/Mock20_folder');
 var MOCK20playlist = require('./../../Objects/Mock20_playlist');
-var Bank = require('./../../Mock20_ObjectBank');
+var Bank = require('./../../Objects/Mock20_ObjectBank');
 var Campaign = require('./../API_Objects/Campaign');
 require('./../../Mock20_Output');
 module.exports.MOCK20moveToFolder = function (item, folderid) {

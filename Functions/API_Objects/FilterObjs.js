@@ -1,5 +1,5 @@
 //see https://wiki.roll20.net/API:Objects#filterObjs.28callback.29
-var Bank = require('./../../Mock20_ObjectBank');
+var Bank = require('./../../Objects/Mock20_ObjectBank');
 require('./../../Mock20_Output');
 module.exports = function (testFunc, options) {
   if (!options || typeof options != 'object') options = {};

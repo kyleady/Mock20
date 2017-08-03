@@ -1,5 +1,5 @@
 //see https://wiki.roll20.net/API:Objects#getObj.28type.2C_id.29
-var Bank = require('./../../Mock20_ObjectBank');
+var Bank = require('./../../Objects/Mock20_ObjectBank');
 require('./../../Mock20_Output');
 var validObjs = {
   ability: true,

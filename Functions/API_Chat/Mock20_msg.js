@@ -1,125 +1,126 @@
 var getObj = require('./../API_Objects/GetObj');
 var filterObjs = require('./../API_Objects/FilterObjs');
-class MOCK20msg{
-  constructor(speakingAs, input, options) {
-    options = options || {};
-    this.parseSpeaker(speakingAs, options);
-    this.parseInput(input);
-    if(this.type == "api" && options.MOCK20selected) this.selected = options.MOCK20selected;
+var msg = {};
+var getMOCK20msg = function(speakingAs, input, options) {
+  msg = {};
+  options = options || {};
+  parseSpeaker(speakingAs, options);
+  parseInput(input);
+  if(msg.type == "api" && options.MOCK20selected) msg.selected = options.MOCK20selected;
+  return msg;
+}
+
+var parseSpeaker = function(speakingAs, options) {
+  if (/^character\|/.test(speakingAs)) {
+    var id = speakingAs.replace('character|', '');
+    var character = getObj('character', id);
+    if (character) msg.who = character.get('name');
+  } else if (/^player\|/.test(speakingAs)) {
+    var id = speakingAs.replace('player|', '');
+    var player = getObj('player', id);
+    if (player) msg.who = player.get('_displayname');
   }
 
-  parseSpeaker(speakingAs, options) {
-    if (/^character\|/.test(speakingAs)) {
-      var id = speakingAs.replace('character|', '');
-      var character = getObj('character', id);
-      if (character) this.who = character.get('name');
-    } else if (/^player\|/.test(speakingAs)) {
-      var id = speakingAs.replace('player|', '');
-      var player = getObj('player', id);
-      if (player) this.who = player.get('_displayname');
-    }
+  if (!msg.who) msg.who = speakingAs;
+  msg.playerid = 'API';
+  if (options.MOCK20playerid) msg.playerid = options.MOCK20playerid;
+}
 
-    if (!this.who) this.who = speakingAs;
-    this.playerid = 'API';
-    if (options.MOCK20playerid) this.playerid = options.MOCK20playerid;
+var parseInput = function(input) {
+  msg.content = input.trim();
+  getType();
+  if (msg.type == 'whisper') getTarget();
+  getInline();
+  getTemplate();
+  if (/rollresult$/.test(msg.type)) getRoll();
+}
+
+var getType = function() {
+  if (/^!/.test(msg.content)) {
+    msg.type = 'api';
+  } else if (/^\/(em|me) /.test(msg.content)) {
+    msg.type = 'emote';
+  } else if (/^\/r(oll)? /i.test(msg.content)) {
+    msg.type = 'rollresult';
+  } else if (/^\/(gr|gmroll) /i.test(msg.content)) {
+    msg.type = 'gmrollresult';
+  } else if (/^\/desc /.test(msg.content)) {
+    msg.type = 'desc';
+  } else if (/^\/w /.test(msg.content)) {
+    msg.type = 'whisper';
+  } else if (/^\//.test(msg.content)) {
+    msg.type = undefined;
+  } else {
+    msg.type = 'general';
   }
 
-  parseInput(input) {
-    this.content = input.trim();
-    this.getType();
-    if (this.type == 'whisper') this.getTarget();
-    this.getInline();
-    this.getTemplate();
-    if (/rollresult$/.test(this.type)) this.getRoll();
+  msg.content = msg.content.replace(/^\/[^ ]* /, '');
+}
+
+var getTarget = function() {
+  var re = /^\s*"([^"]+)"\s/;
+  var matches = msg.content.match(re);
+  var target = undefined;
+  if (matches) {
+    target = getPlayerOrCharacter(matches[1], false);
+  } else {
+    re = /^\s*(\S+)\s/;
+    matches = msg.content.match(re);
+    if (matches) target = getPlayerOrCharacter(matches[1], true);
   }
 
-  getType() {
-    if (/^!/.test(this.content)) {
-      this.type = 'api';
-    } else if (/^\/(em|me) /.test(this.content)) {
-      this.type = 'emote';
-    } else if (/^\/r(oll)? /i.test(this.content)) {
-      this.type = 'rollresult';
-    } else if (/^\/(gr|gmroll) /i.test(this.content)) {
-      this.type = 'gmrollresult';
-    } else if (/^\/desc /.test(this.content)) {
-      this.type = 'desc';
-    } else if (/^\/w /.test(this.content)) {
-      this.type = 'whisper';
-    } else if (/^\//.test(this.content)) {
-      this.type = undefined;
-    } else {
-      this.type = 'general';
-    }
-
-    this.content = this.content.replace(/^\/[^ ]* /, '');
-  }
-
-  getTarget() {
-    var re = /^\s*"([^"]+)"\s/;
-    var matches = this.content.match(re);
-    var target = undefined;
-    if (matches) {
-      target = getPlayerOrCharacter(matches[1], false);
-    } else {
-      re = /^\s*(\S+)\s/;
-      matches = this.content.match(re);
-      if (matches) target = getPlayerOrCharacter(matches[1], true);
-    }
-
-    if (!target) return this.type = undefined;
-    this.content = this.content.replace(re, '');
-    if (typeof target == 'object' && target.get('_type') == 'character' && target.get('controlledby') == '') target = 'gm';
-    if (typeof target == 'string' && target == 'gm') {
-      this.target = 'gm';
-      this.target_name = 'GM';
-    } else if (target.get('_type') == 'player') {
-      this.target = target.get('_id');
-      this.target_name = target.get('_displayname');
-    } else {
-      this.target = target.get('controlledby');
-      this.target_name = target.get('name');
-    }
-  }
-
-  getInline() {
-    var counter = 0;
-    while (true) {
-      var inlineroll = getDeepestInline(this.content);
-      if (inlineroll) {
-        var oldContent = this.content;
-        this.content = oldContent.substring(0, inlineroll.start);
-        this.content += '$[[' + counter + ']]';
-        this.content += oldContent.substring(inlineroll.end+1);
-        this.inlinerolls = this.inlinerolls || [];
-        this.inlinerolls.push(inlineroll.text);
-        counter++;
-      } else {
-        break;
-      }
-    }
-  }
-
-  getTemplate() {
-    var matches = this.content.match(/^&\{template:([^\}]+)\}/);
-    if (matches) this.rolltemplate = matches[1];
-    this.content = this.content.replace(/^&\{[^\}]+\}/, '');
-  }
-
-  getRoll() {
-    this.origRoll = this.content;
-    this.content = {};
+  if (!target) return msg.type = undefined;
+  msg.content = msg.content.replace(re, '');
+  if (typeof target == 'object' && target.get('_type') == 'character' && target.get('controlledby') == '') target = 'gm';
+  if (typeof target == 'string' && target == 'gm') {
+    msg.target = 'gm';
+    msg.target_name = 'GM';
+  } else if (target.get('_type') == 'player') {
+    msg.target = target.get('_id');
+    msg.target_name = target.get('_displayname');
+  } else {
+    msg.target = target.get('controlledby');
+    msg.target_name = target.get('name');
   }
 }
 
-function getPlayerOrCharacter(name, firstWordOnly) {
+var getInline = function() {
+  var counter = 0;
+  while (true) {
+    var inlineroll = getDeepestInline(msg.content);
+    if (inlineroll) {
+      var oldContent = msg.content;
+      msg.content = oldContent.substring(0, inlineroll.start);
+      msg.content += '$[[' + counter + ']]';
+      msg.content += oldContent.substring(inlineroll.end+1);
+      msg.inlinerolls = msg.inlinerolls || [];
+      msg.inlinerolls.push(inlineroll.text);
+      counter++;
+    } else {
+      break;
+    }
+  }
+}
+
+var getTemplate = function() {
+  var matches = msg.content.match(/^&\{template:([^\}]+)\}/);
+  if (matches) msg.rolltemplate = matches[1];
+  msg.content = msg.content.replace(/^&\{[^\}]+\}/, '');
+}
+
+var getRoll = function() {
+  msg.origRoll = msg.content;
+  msg.content = {};
+}
+
+var getPlayerOrCharacter = function(name, firstWordOnly) {
   if (name.toLowerCase() == 'gm') return 'gm';
   var obj = findObjCI('player', name, firstWordOnly);
   if (!obj) obj = findObjCI('character', name, firstWordOnly);
   return obj;
 }
 
-function findObjCI(type, name, firstWordOnly) {
+var findObjCI = function(type, name, firstWordOnly) {
   name = name.toLowerCase();
   return filterObjs(function (obj) {
     if (obj.get('_type') == type) {
@@ -135,7 +136,7 @@ function findObjCI(type, name, firstWordOnly) {
   })[0];
 }
 
-function getDeepestInline(content) {
+var getDeepestInline = function(content) {
   var inline = undefined;
   content = content.replace(/\$\[\[(\d+)\]\]/g, '$$(($1))');
   content.replace(/\[\[([^\]\[]+)\]\]/, function(match, p1, offset, string){
@@ -149,4 +150,4 @@ function getDeepestInline(content) {
   return inline;
 }
 
-module.exports = MOCK20msg;
+module.exports = getMOCK20msg;
