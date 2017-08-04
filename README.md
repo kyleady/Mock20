@@ -33,8 +33,8 @@ See the [wiki](https://github.com/kyleady/Mock20/wiki) for more information.
 * [API:Objects](https://wiki.roll20.net/API:Introduction)
 * [API:Events](https://wiki.roll20.net/API:Events)
 * [API:Chat](https://wiki.roll20.net/API:Chat)
-  * WARNING: The current version of Mock20 does not parse rolls like `'/r D20'`
-  * WARNING: The current version of Mock20 does not parse inlines like  `'Rolls a [[D20]]'`
+  * **WARNING**: The current version of Mock20 does not parse rolls like `'/r D20'`
+  * **WARNING**: The current version of Mock20 does not parse inlines like  `'Rolls a [[D20]]'`
 * [API:Utility](https://wiki.roll20.net/API:Utility_Functions)
 
 ## Simulating
