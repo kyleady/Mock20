@@ -13,7 +13,7 @@
     "nyc": "^11.1.0"
   },
   "scripts": {
-    "test": "mocha --recursive",
+    "test": "nyc --reporter=html --reporter=text mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
