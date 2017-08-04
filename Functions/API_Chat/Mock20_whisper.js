@@ -1,6 +1,6 @@
 var filterObjs = require('./../API_Objects/FilterObjs');
 
-var getTarget = function(msg) {
+var getTarget = function (msg) {
   var re = /^\s*"([^"]+)"\s/;
   var matches = msg.content.match(re);
   var target = undefined;
@@ -16,8 +16,10 @@ var getTarget = function(msg) {
     msg.type = undefined;
     return msg;
   }
+
   msg.content = msg.content.replace(re, '');
-  if (typeof target == 'object' && target.get('_type') == 'character' && target.get('controlledby') == '') target = 'gm';
+  if (typeof target == 'object' && target.get('_type') == 'character'
+  && target.get('controlledby') == '') target = 'gm';
   if (typeof target == 'string' && target == 'gm') {
     msg.target = 'gm';
     msg.target_name = 'GM';
@@ -30,16 +32,16 @@ var getTarget = function(msg) {
   }
 
   return msg;
-}
+};
 
-var getPlayerOrCharacter = function(name, firstWordOnly) {
+var getPlayerOrCharacter = function (name, firstWordOnly) {
   if (name.toLowerCase() == 'gm') return 'gm';
   var obj = findObjCI('player', name, firstWordOnly);
   if (!obj) obj = findObjCI('character', name, firstWordOnly);
   return obj;
-}
+};
 
-var findObjCI = function(type, name, firstWordOnly) {
+var findObjCI = function (type, name, firstWordOnly) {
   name = name.toLowerCase();
   return filterObjs(function (obj) {
     if (obj.get('_type') == type) {
@@ -53,6 +55,6 @@ var findObjCI = function(type, name, firstWordOnly) {
       return objName.toLowerCase() == name;
     }
   })[0];
-}
+};
 
 module.exports = getTarget;

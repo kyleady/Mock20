@@ -23,19 +23,31 @@ function moveToFolder(item, folderid, targetid, journal, type) {
   type = type || 'folder';
   var proto = (type == 'folder') ? MOCK20folder : MOCK20playlist;
   var rootfolder = proto.getRootFolder();
-  if(typeof item != 'object' || !item.MOCK20addToJournal) return MOCK20warning('moveToFolder: invalid item');
-  if(item.id == targetid) return;
+  if (typeof item != 'object' || !item.MOCK20addToJournal) {
+    return MOCK20warning('moveToFolder: invalid item');
+  }
+
+  if (item.id == targetid) return;
 
   if (!folderid && targetid) folderid = rootfolder.findItem(targetid);
   if (folderid == 'root_folder') {
     var folder = rootfolder;
   } else {
-    if(!folderid || !Bank.get(type, folderid)) return MOCK20warning('moveToFolder: invalid folder');
+    if (!folderid || !Bank.get(type, folderid)) {
+      return MOCK20warning('moveToFolder: invalid folder');
+    }
+
     var folder = Bank.get(type, folderid);
   }
-  if(item.get('_type') == 'playlist' && folder.id != 'root_folder') return MOCK20warning('moveToFolder: cannot move a playlist inside of a playlist');
-  if(item.get('_type') == type
-  && (item.id == folder.id || item.findItem(folder.id))) return MOCK20warning('moveToFolder: cannot move a folder into itself');
+
+  if (item.get('_type') == 'playlist' && folder.id != 'root_folder') {
+    return MOCK20warning('moveToFolder: cannot move a playlist inside of a playlist');
+  }
+
+  if (item.get('_type') == type && (item.id == folder.id || item.findItem(folder.id))) {
+    return MOCK20warning('moveToFolder: cannot move a folder into itself');
+  }
+
   rootfolder.removeItem(item.id);
   folder.addItem(item, targetid);
   Campaign().saveRootFolder(rootfolder);

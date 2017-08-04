@@ -30,19 +30,22 @@ class MOCK20bank {
     if (!options.MOCK20messyDelete) {
       if (obj.removeFromJournal) obj.removeFromJournal();
     }
+
     MOCK20trigger('destroy:' + type, obj);
     delete this[type][id];
   }
 
   addToPage(obj) {
     if (obj.MOCK20data._pageid != undefined) {
-      if(obj && obj.get('_pageid')){
+      if (obj && obj.get('_pageid')) {
         var page = this.page[obj.get('_pageid')];
       }
+
       if (!page) {
         MOCK20warning('Invalid page id.');
         return false;
       }
+
       page.MOCK20update('_zorder', page.get('_zorder') + ',' + obj.id);
     }
 

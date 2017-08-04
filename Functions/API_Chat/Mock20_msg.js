@@ -3,16 +3,16 @@ var getTarget = require('./Mock20_whisper');
 var getInline = require('./Mock20_inline');
 var getRoll = require('./Mock20_roll');
 var msg = {};
-var getMOCK20msg = function(speakingAs, input, options) {
+var getMOCK20msg = function (speakingAs, input, options) {
   msg = {};
   options = options || {};
   parseSpeaker(speakingAs, options);
   parseInput(input);
-  if(msg.type == "api" && options.MOCK20selected) msg.selected = options.MOCK20selected;
+  if (msg.type == 'api' && options.MOCK20selected) msg.selected = options.MOCK20selected;
   return msg;
-}
+};
 
-var parseSpeaker = function(speakingAs, options) {
+var parseSpeaker = function (speakingAs, options) {
   if (/^character\|/.test(speakingAs)) {
     var id = speakingAs.replace('character|', '');
     var character = getObj('character', id);
@@ -26,18 +26,18 @@ var parseSpeaker = function(speakingAs, options) {
   if (!msg.who) msg.who = speakingAs;
   msg.playerid = 'API';
   if (options.MOCK20playerid) msg.playerid = options.MOCK20playerid;
-}
+};
 
-var parseInput = function(input) {
+var parseInput = function (input) {
   msg.content = input.trim();
   getType();
   if (msg.type == 'whisper') msg = getTarget(msg);
   msg = getInline(msg);
   getTemplate();
   if (/rollresult$/.test(msg.type)) msg = getRoll(msg);
-}
+};
 
-var getType = function() {
+var getType = function () {
   if (/^!/.test(msg.content)) {
     msg.type = 'api';
   } else if (/^\/(em|me) /.test(msg.content)) {
@@ -50,19 +50,22 @@ var getType = function() {
     msg.type = 'desc';
   } else if (/^\/w /.test(msg.content)) {
     msg.type = 'whisper';
+  } else if (/^\/direct /.test(msg.content) && msg.playerid == 'API') {
+    msg.type = 'direct';
   } else if (/^\//.test(msg.content)) {
     msg.type = undefined;
+    msg.content = 'Unrecognized command: ' + msg.content;
   } else {
     msg.type = 'general';
   }
 
   msg.content = msg.content.replace(/^\/[^ ]* /, '');
-}
+};
 
-var getTemplate = function() {
+var getTemplate = function () {
   var matches = msg.content.match(/^&\{template:([^\}]+)\}/);
   if (matches) msg.rolltemplate = matches[1];
   msg.content = msg.content.replace(/^&\{[^\}]+\}/, '');
-}
+};
 
 module.exports = getMOCK20msg;

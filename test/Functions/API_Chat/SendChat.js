@@ -193,4 +193,17 @@ describe('sendChat()', function(){
       expect(msg.selected[0]._type).to.equal('graphic');
     });
   });
+  describe('type:direct', function(){
+    it('should make a direct msg when starting with /direct', function(){
+      sendChat("Mock20", "/direct The msg is still parsed by the API.");
+      expect(msg.type).to.equal('direct');
+    });
+    it('should be unable to send a /direct msg through a player', function(){
+      var player = createObj('player', {_displayname: 'test user'}, {MOCK20override: true});
+      player.MOCK20gm = true;
+      msg = undefined;
+      player.MOCK20chat('/direct Not even GMs can send direct msgs.');
+      expect(msg).to.be.undefined;
+    });
+  });
 });

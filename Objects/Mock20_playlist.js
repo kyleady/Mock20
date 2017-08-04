@@ -9,9 +9,11 @@ class MOCK20playlist extends MOCK20folder{
       n: 'Playlist',
       _i: [],
       s: 's'
-    }
+    };
+
     super(_id, input, data);
   }
+
   folderObj() {
     return {
       n: this.MOCK20data.n,
