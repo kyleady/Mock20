@@ -4,8 +4,10 @@ var createObj = require('./../../../Functions/API_Objects/CreateObj');
 var sendChat = require('./../../../Functions/API_Chat/SendChat');
 describe('sendChat()', function(){
   var msg = {};
+  var messagesSent = 0;
   on('chat:message', function(message){
     msg = message;
+    messagesSent++;
   });
   describe('type:general', function(){
     it('should make a general msg by default', function(){
@@ -59,13 +61,32 @@ describe('sendChat()', function(){
       expect(msg.inlinerolls).to.have.lengthOf(6);
     });
     it('should trigger on(\"chat:message\", func)', function(){
-      var messagesent = false;
-      on('chat:message', function(msg){
-        messagesent = true;
-      });
-      expect(messagesent).to.equal(false);
+      messagesSent = 0;
+      expect(messagesSent).to.equal(0);
       sendChat('Mock20', '[[[[0]]3+[[[[1]]2]]]] [[[[4]]5]]');
-      expect(messagesent).to.equal(true);
+      expect(messagesSent).to.equal(1);
+    });
+    it('should turn each newline in the input into a new message', function(){
+      messagesSent = 0;
+      expect(messagesSent).to.equal(0);
+      sendChat('Mock20', '1\n2\n3\n4\n5');
+      expect(messagesSent).to.equal(5);
+    });
+    it('should add \' (GM)\' to msg.who for gm\'s.', function(){
+      var gm = createObj('player', {_displayname: "The GM", speakingas: ""}, {MOCK20override: true});
+      gm.MOCK20gm = true;
+      gm.MOCK20chat('This is the text of the msg');
+      expect(msg.who).to.equal('The GM (GM)');
+    });
+    it('should not send a message with a callback function', function(){
+      msg = 'has not been sent';
+      sendChat('Mock20', 'get ready to callback', function(){});
+      expect(msg).to.equal('has not been sent');
+    });
+    it('the callback function should receive an array of msg objects', function(){
+      sendChat('Mock20', 'get ready to callback', function(msgs){
+        expect(msgs).to.be.an('array');
+      });
     });
   });
   describe('type:rollresult', function(){

@@ -13,6 +13,7 @@ var getMOCK20msg = function (speakingAs, input, options) {
 };
 
 var parseSpeaker = function (speakingAs, options) {
+  msg.who = speakingAs;
   if (/^character\|/.test(speakingAs)) {
     var id = speakingAs.replace('character|', '');
     var character = getObj('character', id);
@@ -23,9 +24,11 @@ var parseSpeaker = function (speakingAs, options) {
     if (player) msg.who = player.get('_displayname');
   }
 
-  if (!msg.who) msg.who = speakingAs;
   msg.playerid = 'API';
-  if (options.MOCK20playerid) msg.playerid = options.MOCK20playerid;
+  if (options.MOCK20playerid) {
+    var player = getObj('player', options.MOCK20playerid);
+    if (player) msg.playerid = options.MOCK20playerid;
+  };
 };
 
 var parseInput = function (input) {
@@ -64,7 +67,8 @@ var getType = function () {
 
 var getTemplate = function () {
   var matches = msg.content.match(/^&\{template:([^\}]+)\}/);
-  if (matches) msg.rolltemplate = matches[1];
+  if (!matches) return;
+  msg.rolltemplate = matches[1];
   msg.content = msg.content.replace(/^&\{[^\}]+\}/, '');
 };
 
