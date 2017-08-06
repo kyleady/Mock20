@@ -24,6 +24,7 @@ describe('Campaign()', function(){
 
     expect(getObj('character', character.id)).to.be.undefined;
     changeCharacterDetected = false;
+    var character = createObj('character');
     character.set('name', 'character name');
     expect(changeCharacterDetected).to.equal(false);
     expect(Campaign().get('playerpageid')).to.equal(false);
