@@ -130,15 +130,25 @@ describe('sendChat():general', function(){
     player.MOCK20chat('#sendChat-macro-test1');
     expect(messagesSent).to.equal(9);
   });
-  it('should throw an exception if trapped in an infinite loop of macro/ability/attribute replacement', function(){
+  it('should not replace an invalid macro while only removing the brackets on an invalid ability/attribute', function(){
+    var player = createObj('player', {_displayname: 'test user'}, {MOCK20override: true});
     var character = createObj('character', {name: 'sendChat MAA test2'});
+    player.MOCK20chat('#this-really-should-not-be-a-macro');
+    expect(msg.content).to.equal('#this-really-should-not-be-a-macro');
+    player.MOCK20chat('@{this-really-should-not-be-a-character|this-really-should-not-be-an-attribute}');
+    expect(msg.content).to.equal('this-really-should-not-be-a-character|this-really-should-not-be-an-attribute');
+    player.MOCK20chat('@{sendChat MAA test2|this-really-should-not-be-an-attribute}');
+    expect(msg.content).to.equal('sendChat MAA test2|this-really-should-not-be-an-attribute');
+  });
+  it('should throw an exception if trapped in an infinite loop of macro/ability/attribute replacement', function(){
+    var character = createObj('character', {name: 'sendChat MAA test3'});
     var ability = createObj('ability', {
       name: 'sendChat-ability-test3',
       _characterid: character.id,
-      action: '%{sendChat MAA test2|sendChat-ability-test3}'
+      action: '%{sendChat MAA test3|sendChat-ability-test3}'
     });
     expect(
-      function() { sendChat('Mock20', '%{seNdChat MAA test2|sendChat-aBility-test3}'); }
+      function() { sendChat('Mock20', '%{seNdChat MAA test3|sendChat-aBility-test3}'); }
     ).to.throw();
   });
 });
