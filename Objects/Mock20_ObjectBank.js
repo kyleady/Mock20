@@ -9,7 +9,7 @@ class MOCK20bank {
     var id = this.objCounter.toString(16);
     var obj = new Proto(id, attributes);
     var type = obj.get('_type');
-    if (!this.addToPage(obj)) return;
+    if (!this.addObjToPage(obj)) return;
     if (obj.MOCK20addToJournal) obj.MOCK20addToJournal();
     this.objCounter++;
     if (this[type] == undefined) this[type] = {};
@@ -35,7 +35,7 @@ class MOCK20bank {
     delete this[type][id];
   }
 
-  addToPage(obj) {
+  addObjToPage(obj) {
     if (obj.MOCK20data._pageid != undefined) {
       if (obj && obj.get('_pageid')) {
         var page = this.page[obj.get('_pageid')];
@@ -50,6 +50,16 @@ class MOCK20bank {
     }
 
     return true;
+  }
+
+  MOCK20reset() {
+    for (var k in this) {
+      if (typeof this[k] != 'function') {
+        delete this[k];
+      }
+    }
+
+    this.objCounter = 0;
   }
 };
 

@@ -1,5 +1,8 @@
 var MOCK20object = require('./Mock20_object');
 var findObjs = require('./../Functions/API_Objects/FindObjs');
+var Bank = require('./Mock20_ObjectBank');
+var on = require('./../Functions/API_Events/On');
+var state = require('./../Functions/API_Objects/State');
 class MOCK20campaign extends MOCK20object{
   constructor(_id, input) {
     var data = {
@@ -73,6 +76,22 @@ class MOCK20campaign extends MOCK20object{
     output = output.replace(/,$/, '');
     var journal = getJournalType(folder);
     this.MOCK20update(journal, output);
+  }
+
+  MOCK20reset() {
+    Bank.MOCK20reset();
+    on({ MOCK20reset: true });
+    state = {};
+    this.MOCK20data = {
+      _id: 'root',
+      _type: 'campaign',
+      turnorder: '',
+      initiativepage: false,
+      playerpageid: false,
+      playerspecificpages: false,
+      _journalfolder: '',
+      _jukeboxfolder: ''
+    };
   }
 }
 

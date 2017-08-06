@@ -6,7 +6,7 @@ global.findObjs = require('./Functions/API_Objects/FindObjs');
 global.getAllObjs = require('./Functions/API_Objects/GetAllObjs');
 global.getAttrByName = require('./Functions/API_Objects/GetAttrByName');
 global.getObj = require('./Functions/API_Objects/GetObj');
-global.state = {};
+global.state = require('./Functions/API_Objects/State');
 
 //Functions - API:Events
 global.on = require('./Functions/API_Events/On');

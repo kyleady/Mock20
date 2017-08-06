@@ -7,6 +7,7 @@ require('./../../Mock20_Output');
 var responses = {};
 
 module.exports = function (eventName, response) {
+  if (typeof eventName == 'object' && eventName.MOCK20reset) return responses = {};
   if (typeof eventName != 'string') return MOCK20warning('Invalid event name given for on().');
   if (typeof response != 'function') return MOCK20warning('Invalid function given for on().');
   if (!responses[eventName]) {
