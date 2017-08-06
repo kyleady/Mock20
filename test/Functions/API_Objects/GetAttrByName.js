@@ -17,24 +17,6 @@ describe('getAttrByName()', function(){
     expect(defaultsToCurrent).to.equal(attribute.get('current'));
     expect(max).to.equal(attribute.get('max'));
   });
-  it('should default to the first attribute with the same name', function(){
-    var character = createObj('character', {name: 'getAttrByName identical name test'});
-    var firstAttribute = createObj('attribute', {
-      name: 'getAttrByName identical name test',
-      current: 'the current value',
-      max: 'the max value',
-      _characterid: character.id
-    });
-    var secondAttribute = createObj('attribute', {
-      name: 'getAttrByName identical name test',
-      current: 'a different current value',
-      max: 'a different max value',
-      _characterid: character.id
-    });
-    var current = getAttrByName(character.id, secondAttribute.get('name'), 'current');
-    expect(firstAttribute.get('current')).to.not.equal(secondAttribute.get('current'));
-    expect(current).to.equal(firstAttribute.get('current'));
-  });
   it('should return undefined if the input is invalid', function(){
     var character = createObj('character', {name: 'getAttrByName identical name test'});
     var attribute = createObj('attribute', {

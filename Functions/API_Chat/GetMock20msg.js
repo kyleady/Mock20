@@ -1,7 +1,7 @@
 var getObj = require('./../API_Objects/GetObj');
-var getTarget = require('./Mock20_whisper');
-var getInline = require('./Mock20_inline');
-var getRoll = require('./Mock20_roll');
+var getTarget = require('./GetTarget');
+var getInline = require('./GetInline');
+var getRoll = require('./GetRoll');
 var msg = {};
 var getMOCK20msg = function (speakingAs, input, options) {
   msg = {};
