@@ -5,6 +5,10 @@ module.exports = function (character, token) {
     return MOCK20warning('Invalid Character in setDefaultTokenForCharacter().');
   }
 
+  if (typeof token != 'object') {
+    throw 'TypeError: Cannot read property \'toJSON\' of ' + JSON.stringify(token);
+  }
+
   if (token instanceof MOCK20object == false || token.get('_type') != 'graphic') {
     return MOCK20warning('Invalid Token in setDefaultTokenForCharacter().');
   }

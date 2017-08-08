@@ -151,4 +151,17 @@ describe('sendChat():general', function(){
       function() { sendChat('Mock20', '%{seNdChat MAA test3|sendChat-aBility-test3}'); }
     ).to.throw();
   });
+  it('should break like the Roll20 sendChat()', function(){
+    expect(function(){sendChat()}).not.to.throw();
+    expect(function(){sendChat(2)}).not.to.throw();
+    expect(function(){sendChat(undefined, 2)}).not.to.throw();
+    expect(function(){sendChat(2, 0)}).not.to.throw();
+    expect(function(){sendChat('t', 't', 2)}).to.not.throw();
+    expect(function(){sendChat('t', 't', 2, 2)}).to.not.throw();
+
+    expect(function(){sendChat(0, 2)}).to.throw();
+    expect(function(){sendChat(2, 2)}).to.throw();
+    expect(function(){sendChat('t', 2)}).to.throw();
+    expect(function(){sendChat(2, 't')}).to.throw();
+  });
 });

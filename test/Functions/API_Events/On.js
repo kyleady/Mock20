@@ -7,9 +7,9 @@ describe('on()', function(){
     on("add:handout", function(){
       addHandoutDetected = true;
     });
-    var character = createObj('character');
+    var character = createObj('character', {});
     expect(addHandoutDetected).to.equal(false);
-    var handout = createObj('handout');
+    var handout = createObj('handout', {});
     expect(addHandoutDetected).to.equal(true);
   });
   it('should react to changes in objects in order, reacting to specific changes first', function(){
@@ -23,7 +23,7 @@ describe('on()', function(){
     on("change:ability:description", function(){
       changeAbilityDetected.push('ability.description');
     });
-    var character = createObj('character');
+    var character = createObj('character', {});
     var ability = createObj('ability', {_characterid: character.id});
     character.set('name', "On(\"change:ability\") test");
     expect(changeAbilityDetected).to.be.empty;
@@ -43,8 +43,8 @@ describe('on()', function(){
     on("destroy:macro", function(){
       removeMacroDetected = true;
     });
-    var character = createObj('character');
-    var macro = createObj('macro');
+    var character = createObj('character', {});
+    var macro = createObj('macro', {});
     expect(removeMacroDetected).to.equal(false);
     macro.remove();
     expect(removeMacroDetected).to.equal(true);
@@ -98,5 +98,13 @@ describe('on()', function(){
     });
     character.set('name', 'Trevor');
     expect(character.get('name')).to.not.equal('Trev');
+  });
+  it('should break like the Roll20 on()', function(){
+    expect(function(){on()}).to.throw;
+    expect(function(){on(5, function(){})}).to.throw;
+
+    expect(function(){on('invalid')}).to.not.throw;
+    expect(function(){on('invalid', 5)}).to.not.throw;
+    expect(function(){on('add:graphic','invalid')}).to.not.throw;
   });
 });

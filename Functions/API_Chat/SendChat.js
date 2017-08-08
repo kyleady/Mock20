@@ -3,7 +3,16 @@ var replaceAttributeAbilityMacro = require('./ReplaceAttributeAbilityMacro');
 require('./../../Mock20_Output');
 
 var sendChat = function (speakingAs, input, callback, options) {
-  options = options || {};
+  if (speakingAs == undefined || input == undefined) {
+    MOCK20error('Error: When using sendChat() you must specify a speakingas and input property.');
+    return;
+  }
+
+  if (!input) return;
+  if (typeof speakingAs != 'string') throw 'TypeError: speakingas.indexOf is not a function';
+  if (typeof input != 'string') throw 'TypeError: op.content.replace is not a function';
+  if (typeof options != 'object') options = {};
+
   input = replaceAttributeAbilityMacro(input, !options.MOCK20playerid);
   var inputs = input.split('\n');
   var msgs = [];

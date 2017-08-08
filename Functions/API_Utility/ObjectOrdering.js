@@ -10,9 +10,12 @@ module.exports.toBack = function (obj) {
 };
 
 function reorderObjs(obj, action) {
-  if (typeof obj != 'object' || obj.get('_pageid') == undefined) {
-    return MOCK20warning(action + '() received an invalid obj. Roll20 crashes here.');
+  if (typeof obj != 'object') {
+    throw 'toBack() and toFront() '
+     + 'must be given an object either from an event or getObj() or similar.';
   }
+
+  if (obj.get('_pageid') == undefined) throw 'Error: Could not find page for object.';
 
   var page = getObj('page', obj.get('_pageid'));
   if (page == undefined) {

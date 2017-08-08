@@ -15,10 +15,11 @@ describe('randomInteger()', function(){
       expect(rolls[i]).to.be.below(102158);
     }
   });
-  it('should return undefined if given invalid input', function(){
-    expect(randomInteger('10')).to.be.undefined;
-    expect(randomInteger([2,3])).to.be.undefined;
-    expect(randomInteger(0.3)).to.be.undefined;
-    expect(randomInteger(undefined)).to.be.undefined;
+  it('should break like Roll20 randomInteger()', function() {
+    expect(randomInteger(10.3)).to.be.above(0).and.below(11);
+    expect(randomInteger('10.3')).to.be.above(0).and.below(11);
+    expect(randomInteger([2,3])).to.be.null;
+    expect(randomInteger(0)).to.be.NaN;
+    expect(function(){randomInteger('-2')}).to.throw;
   });
 });

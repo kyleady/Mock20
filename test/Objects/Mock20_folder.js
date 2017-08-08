@@ -68,10 +68,10 @@ describe('folders', function(){
     var folder2 = createObj('folder', {}, {MOCK20override: true});
     var subfolder = createObj('folder', {}, {MOCK20override: true});
     var subsubfolder = createObj('folder', {}, {MOCK20override: true});
-    var handout = createObj('handout');
-    var character = createObj('character');
-    var handout2 = createObj('handout');
-    var character2 = createObj('character');
+    var handout = createObj('handout', {});
+    var character = createObj('character', {});
+    var handout2 = createObj('handout', {});
+    var character2 = createObj('character', {});
     MOCK20moveToFolder(subfolder, folder.id);
     MOCK20moveToFolder(subsubfolder, subfolder.id);
     MOCK20moveToFolder(handout, folder.id);

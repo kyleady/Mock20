@@ -2,9 +2,12 @@
 var Bank = require('./../../Objects/Mock20_ObjectBank');
 require('./../../Mock20_Output');
 module.exports = function (attrs, options) {
-  if (typeof attrs != 'object') return MOCK20warning('Invalid attrs for findObjs()');
+  if (typeof attrs != 'object') {
+    MOCK20warning('Invalid attrs for findObjs()');
+    attrs = {};
+  };
 
-  if (options && typeof options != 'object') {
+  if (typeof options != 'object') {
     MOCK20warning('Invalid options for findObjs()');
     options = undefined;
   }

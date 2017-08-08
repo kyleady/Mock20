@@ -10,7 +10,7 @@ describe('Campaign()', function(){
     on('change:character', function() {
       changeCharacterDetected = true;
     });
-    var character = createObj('character');
+    var character = createObj('character', {});
     var page = createObj('page', {}, {MOCK20override: true});
     Campaign().set('playerpageid', page.id);
 
@@ -24,7 +24,7 @@ describe('Campaign()', function(){
 
     expect(getObj('character', character.id)).to.be.undefined;
     changeCharacterDetected = false;
-    var character = createObj('character');
+    var character = createObj('character', {});
     character.set('name', 'character name');
     expect(changeCharacterDetected).to.equal(false);
     expect(Campaign().get('playerpageid')).to.equal(false);

@@ -9,8 +9,8 @@ var on = require('./../../../Functions/API_Events/On');
 describe('Folder Structure', function(){
   describe('MOCK20moveToFolder()', function(){
     it('should move journal items and folders into the given folder', function(){
-      var handout = createObj('handout');
-      var character = createObj('character');
+      var handout = createObj('handout', {});
+      var character = createObj('character', {});
       var subfolder = createObj('folder', {}, {MOCK20override: true});
       var folder = createObj('folder', {}, {MOCK20override: true});
       MOCK20moveToFolder(handout, folder.id);
@@ -22,8 +22,8 @@ describe('Folder Structure', function(){
       expect(JSON.stringify(subfolder.getStructure().i)).to.equal(JSON.stringify([character.id]));
     });
     it('should move journal items and folders to the root folder if the folder id is \'root_folder\'', function(){
-      var handout = createObj('handout');
-      var character = createObj('character');
+      var handout = createObj('handout', {});
+      var character = createObj('character', {});
       var subfolder = createObj('folder', {}, {MOCK20override: true});
       var folder = createObj('folder', {}, {MOCK20override: true});
       MOCK20moveToFolder(handout, folder.id);
@@ -49,7 +49,7 @@ describe('Folder Structure', function(){
       expect(changeCampaignJournalFolderDetected4).to.equal(false);
     });
     it('should not modify _journalfolder if the folder.id refers to a folder that no longer exists', function(){
-      var handout = createObj('handout');
+      var handout = createObj('handout', {});
       var folder = createObj('folder', {}, {MOCK20override: true});
       folder.remove({MOCK20override: true});
       var changeCampaignJournalFolderDetected5 = false;
@@ -84,8 +84,8 @@ describe('Folder Structure', function(){
   });
   describe('MOCK20moveBeforeFolderItem()', function(){
     it('should move folder items and folders in front of the target', function(){
-      var handout = createObj('handout');
-      var character = createObj('character');
+      var handout = createObj('handout', {});
+      var character = createObj('character', {});
       var subfolder = createObj('folder', {}, {MOCK20override: true});
       var folder = createObj('folder', {}, {MOCK20override: true});
       MOCK20moveToFolder(handout, folder.id);
@@ -95,8 +95,8 @@ describe('Folder Structure', function(){
       expect(JSON.stringify(folder.getStructure().i)).to.equal(JSON.stringify([subfolder.getStructure(), character.id, handout.id]));
     });
     it('should be unable to move folder items and folders in front of \'root_folder\'', function(){
-      var handout = createObj('handout');
-      var character = createObj('character');
+      var handout = createObj('handout', {});
+      var character = createObj('character', {});
       var folder = createObj('folder', {}, {MOCK20override: true});
       var changeCampaignJournalFolderDetected7 = false;
       on('change:campaign:_journalfolder', function(){
@@ -111,8 +111,8 @@ describe('Folder Structure', function(){
       expect(changeCampaignJournalFolderDetected7).to.equal(false);
     });
     it('should do nothing when moving folder items and folders in front of themselves', function(){
-      var handout = createObj('handout');
-      var character = createObj('character');
+      var handout = createObj('handout', {});
+      var character = createObj('character', {});
       var folder = createObj('folder', {}, {MOCK20override: true});
       var changeCampaignJournalFolderDetected8 = false;
       on('change:campaign:_journalfolder', function(){

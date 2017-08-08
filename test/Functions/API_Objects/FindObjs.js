@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 var findObjs = require('./../../../Functions/API_Objects/FindObjs');
 var createObj = require('./../../../Functions/API_Objects/CreateObj');
+var getAllObjs = require('./../../../Functions/API_Objects/GetAllObjs');
 describe('findObjs()', function(){
   it('should properly find objects created by createObj()', function(){
     var dontFindMe = createObj('page', {name: "Find me"}, {MOCK20override: true});
@@ -41,9 +42,7 @@ describe('findObjs()', function(){
     expect(foundObjsOverride).to.include(playlist);
     expect(foundObjsOverride).to.not.include(folder);
   });
-  it('should return undefined if the attributes given are invalid', function(){
-    expect(findObjs(undefined)).to.be.undefined;
-    expect(findObjs('handouts')).to.be.undefined;
-    expect(findObjs(5)).to.be.undefined;
+  it('should return every object if given invalid attributes', function(){
+    expect(findObjs().length).to.equal(getAllObjs().length);
   });
 });

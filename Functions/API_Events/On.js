@@ -8,8 +8,12 @@ var responses = {};
 
 module.exports = function (eventName, response) {
   if (typeof eventName == 'object' && eventName.MOCK20reset) return responses = {};
-  if (typeof eventName != 'string') return MOCK20warning('Invalid event name given for on().');
-  if (typeof response != 'function') return MOCK20warning('Invalid function given for on().');
+  if (typeof eventName != 'string') throw 'invalid or missing channel';
+  if (typeof response != 'function') {
+    return MOCK20warning('Roll20 would accept the invalid function given for on()'
+    + ' and only hit an error when trying to use it.');
+  }
+
   if (!responses[eventName]) {
     responses[eventName] = [response];
   } else {

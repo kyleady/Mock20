@@ -10,7 +10,7 @@ describe('setDefaultTokenForCharacter()', function(){
     setDefaultTokenForCharacter(character, token);
     expect(character.get('_defaulttoken')).to.equal(JSON.stringify(token.MOCK20data));
   });
-  it('should do nothing if either input is invalid', function(){
+  it('should break like the Roll20 setDefaultTokenForCharacter()', function(){
     var character = createObj('character', {});
     var page = createObj('page', {}, {MOCK20override: true});
     var token = createObj('graphic', {_pageid: page.id});
@@ -21,5 +21,6 @@ describe('setDefaultTokenForCharacter()', function(){
     expect(character.get('_defaulttoken')).to.be.empty;
     setDefaultTokenForCharacter(character, {});
     expect(character.get('_defaulttoken')).to.be.empty;
+    expect(function(){setDefaultTokenForCharacter(character, 5)}).to.throw;
   });
 });

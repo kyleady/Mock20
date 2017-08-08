@@ -17,7 +17,7 @@ describe('log()', function(){
       console.log = oldLog;
       return message;
     }
-    var character = createObj('character');
+    var character = createObj('character', {});
     var data = getLogMessage(log, character);
     expect(data).to.equal(JSON.stringify(character.MOCK20data));
   });

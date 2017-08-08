@@ -21,10 +21,10 @@ describe('Object Ordering', function(){
     toBack(text);
     expect(page.get('_zorder')).to.equal(text.id + "," + graphic.id + "," + path.id);
   });
-  it('should do nothing if used on an object without a _pageid', function(){
+  it('should throw if used on an object without a _pageid', function(){
     var page = createObj('page', {name: 'ObjectOrdering test page'}, {MOCK20override: true});
-    toFront(page);
-    toBack(page);
+    expect(function(){toFront(page)}).to.throw;
+    expect(function(){toBack(5)}).to.throw;
   });
   it('should do nothing if used on an object on an invalid page', function(){
     var page = createObj('page', {name: 'ObjectOrdering test page'}, {MOCK20override: true});

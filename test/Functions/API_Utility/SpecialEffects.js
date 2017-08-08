@@ -4,18 +4,27 @@ var spawnFxBetweenPoints = require('./../../../Functions/API_Utility/SpecialEffe
 var spawnFxWithDefinition = require('./../../../Functions/API_Utility/SpecialEffects').spawnFxWithDefinition;
 describe('Special Effects', function(){
   describe('spawnFx()', function(){
-    it('should be a function', function(){
-      expect(spawnFx).to.be.a('function');
+    it('should break like the Roll20 spawnFx()', function(){
+      expect(function(){spawnFx()}).to.throw;
+      expect(function(){spawnFx(2)}).to.throw;
+      expect(function(){spawnFx(2,2)}).to.throw;
+      expect(function(){spawnFx(2,2,2)}).to.throw;
+      expect(function(){spawnFx(2,2,'cat')}).to.not.throw;
+      expect(function(){spawnFx([],2,'cat')}).to.not.throw;
     });
   });
   describe('spawnFxBetweenPoints()', function(){
-    it('should be a function', function(){
-      expect(spawnFxBetweenPoints).to.be.a('function');
+    it('should break like the Roll20 spawnFxBetweenPoints()', function(){
+      expect(function(){spawnFxBetweenPoints()}).to.throw;
+      expect(function(){spawnFxBetweenPoints({})}).to.throw;
+      expect(function(){spawnFxBetweenPoints({}, {})}).to.throw;
+      expect(function(){spawnFxBetweenPoints({}, {}, 'cat')}).to.not.throw;
+      expect(function(){spawnFxBetweenPoints({}, undefined, 'cat')}).to.throw;
     });
   });
   describe('spawnFxWithDefinition()', function(){
-    it('should be a function', function(){
-      expect(spawnFxWithDefinition).to.be.a('function');
+    it('should break like the Roll20 spawnFxWithDefinition()', function(){
+      expect(function(){spawnFxWithDefinition()}).to.not.throw;
     });
   });
 });

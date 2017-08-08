@@ -21,9 +21,8 @@ module.exports = function (type, attributes, options) {
     return MOCK20warning('creatObj() cannot create ' + type + ' objects.');
   }
 
-  if (attributes && typeof attributes != 'object') {
-    MOCK20warning('Invalid attributes for creatObj(\"' + type + '\").');
-    return;
+  if (typeof attributes != 'object') {
+    throw 'Invalid attributes for creatObj(\"' + type + '\").';
   }
 
   return Bank.create(Objects[type], attributes);

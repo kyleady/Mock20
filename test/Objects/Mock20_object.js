@@ -4,7 +4,7 @@ var getObj = require('./../../Functions/API_Objects/GetObj');
 var on = require('./../../Functions/API_Events/On');
 describe('Mock20_objects', function(){
   it('should be able to set multiple properties at once', function(){
-    var character = createObj('character');
+    var character = createObj('character', {});
     character.set({
       name: 'The Forgotten',
       archived: true,
@@ -15,7 +15,7 @@ describe('Mock20_objects', function(){
     expect(character.get('controlledby')).to.equal('all');
   });
   it('should be unable to set values that do not normally exist for the object', function(){
-    var handout = createObj('handout');
+    var handout = createObj('handout', {});
     var folder = createObj('folder', {}, {MOCK20override: true});
     var jukeboxtrack = createObj('jukeboxtrack', {}, {MOCK20override: true});
     handout.set('n', 'new handout name');
@@ -26,12 +26,12 @@ describe('Mock20_objects', function(){
     expect(jukeboxtrack.get('name')).to.be.undefined;
   });
   it('should not be able to set values as undefined', function(){
-    var character = createObj('character');
+    var character = createObj('character', {});
     character.set('archived', undefined);
     expect(character.get('archived')).to.not.be.undefined;
   });
   it('should not be able to object.remove() objects like players without a MOCK20override', function(){
-    var character = createObj('character');
+    var character = createObj('character', {});
     var page = createObj('page', {}, {MOCK20override: true});
     expect(getObj(character.get('_type'), character.id)).to.not.be.undefined;
     expect(getObj(page.get('_type'), page.id)).to.not.be.undefined;
