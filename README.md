@@ -5,7 +5,7 @@
 
 A [node.js](https://nodejs.org/en/) module that mocks the [Roll20](https://roll20.net/) API environment.
 
-## Instalation
+## Installation
 
 1) Get [node and npm](https://www.npmjs.com/get-npm).
 
@@ -30,12 +30,12 @@ Mock20 mocks all of the functions listed in the Roll20 API wiki.
 
 See the [wiki](https://github.com/kyleady/Mock20/wiki) for more information.
 
-* [API:Objects](https://wiki.roll20.net/API:Introduction)
-* [API:Events](https://wiki.roll20.net/API:Events)
-* [API:Chat](https://wiki.roll20.net/API:Chat)
+* [API:Objects](https://github.com/kyleady/Mock20/wiki/API_Objects)
+* [API:Events](https://github.com/kyleady/Mock20/wiki/API_Events)
+* [API:Chat](https://github.com/kyleady/Mock20/wiki/API_Chat)
   * **WARNING**: The current version of Mock20 does not parse rolls like `'/r D20'`
   * **WARNING**: The current version of Mock20 does not parse inlines like  `'Rolls a [[D20]]'`
-* [API:Utility](https://wiki.roll20.net/API:Utility_Functions)
+* [API:Utility](https://github.com/kyleady/Mock20/wiki/API_Utility)
 
 ## Simulating
 
