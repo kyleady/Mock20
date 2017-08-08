@@ -13,7 +13,7 @@ A [node.js](https://nodejs.org/en/) module that mocks the [Roll20](https://roll2
 
 3) Add mock20 as a dependency.
 
-    `npm install kyleady/mock20`
+    `npm install mock20`
 
 4) Require mock20 and signal the end of your scripts.
 
