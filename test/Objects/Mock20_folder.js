@@ -1,8 +1,5 @@
 var expect = require('chai').expect;
-var createObj = require('./../../Functions/API_Objects/CreateObj');
-var getObj = require('./../../Functions/API_Objects/GetObj');
-var MOCK20moveToFolder = require('./../../Functions/Mock20_Setup/FolderStructure').MOCK20moveToFolder;
-var on = require('./../../Functions/API_Events/On');
+require('./../../index');
 describe('folders', function(){
   it('should be created with a MOCK20override', function(){
     var folder = createObj('folder', {n: "Test Folder1"}, {MOCK20override: true});

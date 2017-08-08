@@ -1,6 +1,5 @@
 var expect = require('chai').expect;
-var getObj = require('./../../../Functions/API_Objects/GetObj');
-var createObj = require('./../../../Functions/API_Objects/CreateObj');
+require('./../../../index');
 describe('getObj()', function(){
   it('should be able to retrive objects created by createObj()', function(){
     var character = createObj('character', {name: 'getObj test character'});

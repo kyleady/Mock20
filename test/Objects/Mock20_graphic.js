@@ -1,6 +1,5 @@
 var expect = require('chai').expect;
-var createObj = require('./../../Functions/API_Objects/CreateObj');
-var on = require('./../../Functions/API_Events/On');
+require('./../../index');
 describe('graphics', function(){
   it('should allow you to view status markers with graphic.get(\'status_<marker>\')', function(){
     var page = createObj('page', {}, {MOCK20override: true});

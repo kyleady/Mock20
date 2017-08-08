@@ -1,7 +1,5 @@
 var expect = require('chai').expect;
-var createObj = require('./../../Functions/API_Objects/CreateObj');
-var getObj = require('./../../Functions/API_Objects/GetObj');
-var on = require('./../../Functions/API_Events/On');
+require('./../../index');
 describe('Mock20_objects', function(){
   it('should be able to set multiple properties at once', function(){
     var character = createObj('character', {});

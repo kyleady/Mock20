@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var createObj = require('./../../../Functions/API_Objects/CreateObj');
+require('./../../../index');
 var objs = {
   graphic: true,
   card: false,

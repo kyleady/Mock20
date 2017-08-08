@@ -1,8 +1,5 @@
 var expect = require('chai').expect;
-var createObj = require('./../../Functions/API_Objects/CreateObj');
-var getObj = require('./../../Functions/API_Objects/GetObj');
-var MOCK20moveToPlaylist = require('./../../Functions/Mock20_Setup/FolderStructure').MOCK20moveToPlaylist;
-var on = require('./../../Functions/API_Events/On');
+require('./../../index');
 describe('playlists', function(){
   it('should be created with a MOCK20override', function(){
     var playlist = createObj('playlist', {n: "Test Playlist1"}, {MOCK20override: true});

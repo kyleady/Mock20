@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var createObj = require('./../../Functions/API_Objects/CreateObj');
+require('./../../index');
 describe('characters', function(){
   it('should access their bio asyncronously', function(done){
     var character = createObj('character', {});

@@ -1,6 +1,5 @@
 var expect = require('chai').expect;
-var on = require('./../../../Functions/API_Events/On');
-var sendChat = require('./../../../Functions/API_Chat/SendChat');
+require('./../../../index');
 describe('sendChat():rollresult', function(){
   var msg = {};
   var messagesSent = 0;

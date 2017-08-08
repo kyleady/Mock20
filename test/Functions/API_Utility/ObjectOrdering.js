@@ -1,8 +1,5 @@
 var expect = require('chai').expect;
-var toFront = require('./../../../Functions/API_Utility/ObjectOrdering').toFront;
-var toBack = require('./../../../Functions/API_Utility/ObjectOrdering').toBack;
-var createObj = require('./../../../Functions/API_Objects/CreateObj');
-var on = require('./../../../Functions/API_Events/On');
+require('./../../../index');
 describe('Object Ordering', function(){
   it('should use toFront() and toBack() to change the _zorder of objects', function(){
     var page = createObj('page', {name: 'ObjectOrdering test page'}, {MOCK20override: true});

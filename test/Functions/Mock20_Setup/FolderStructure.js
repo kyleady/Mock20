@@ -1,11 +1,5 @@
 var expect = require('chai').expect;
-var createObj = require('./../../../Functions/API_Objects/CreateObj');
-var getObj = require('./../../../Functions/API_Objects/GetObj');
-var MOCK20moveToFolder = require('./../../../Functions/Mock20_Setup/FolderStructure').MOCK20moveToFolder;
-var MOCK20moveBeforeFolderItem = require('./../../../Functions/Mock20_Setup/FolderStructure').MOCK20moveBeforeFolderItem;
-var MOCK20moveBeforePlaylistItem = require('./../../../Functions/Mock20_Setup/FolderStructure').MOCK20moveBeforePlaylistItem;
-var MOCK20moveToPlaylist = require('./../../../Functions/Mock20_Setup/FolderStructure').MOCK20moveToPlaylist;
-var on = require('./../../../Functions/API_Events/On');
+require('./../../../index');
 describe('Folder Structure', function(){
   describe('MOCK20moveToFolder()', function(){
     it('should move journal items and folders into the given folder', function(){

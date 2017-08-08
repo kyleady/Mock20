@@ -1,7 +1,5 @@
 var expect = require('chai').expect;
-var spawnFx = require('./../../../Functions/API_Utility/SpecialEffects').spawnFx;
-var spawnFxBetweenPoints = require('./../../../Functions/API_Utility/SpecialEffects').spawnFxBetweenPoints;
-var spawnFxWithDefinition = require('./../../../Functions/API_Utility/SpecialEffects').spawnFxWithDefinition;
+require('./../../../index');
 describe('Special Effects', function(){
   describe('spawnFx()', function(){
     it('should break like the Roll20 spawnFx()', function(){

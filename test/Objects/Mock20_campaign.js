@@ -1,9 +1,5 @@
 var expect = require('chai').expect;
-var createObj = require('./../../Functions/API_Objects/CreateObj');
-var Campaign = require('./../../Functions/API_Objects/Campaign');
-var on = require('./../../Functions/API_Events/On');
-var getObj = require('./../../Functions/API_Objects/GetObj');
-
+require('./../../index');
 describe('Campaign()', function(){
   it('should reset everything with the Campaign().MOCK20reset() method', function() {
     var changeCharacterDetected = false;

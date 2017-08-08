@@ -1,7 +1,5 @@
 var expect = require('chai').expect;
-var findObjs = require('./../../../Functions/API_Objects/FindObjs');
-var createObj = require('./../../../Functions/API_Objects/CreateObj');
-var getAllObjs = require('./../../../Functions/API_Objects/GetAllObjs');
+require('./../../../index');
 describe('findObjs()', function(){
   it('should properly find objects created by createObj()', function(){
     var dontFindMe = createObj('page', {name: "Find me"}, {MOCK20override: true});

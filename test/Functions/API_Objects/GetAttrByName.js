@@ -1,6 +1,5 @@
 var expect = require('chai').expect;
-var getAttrByName = require('./../../../Functions/API_Objects/GetAttrByName');
-var createObj = require('./../../../Functions/API_Objects/CreateObj');
+require('./../../../index');
 describe('getAttrByName()', function(){
   it('should retrive just the value of the named attribute, defaulting to current', function(){
     var character = createObj('character', {name: 'getAttrByName test character'});
