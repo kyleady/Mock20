@@ -20,8 +20,8 @@ describe('Object Ordering', function(){
   });
   it('should throw if used on an object without a _pageid', function(){
     var page = createObj('page', {name: 'ObjectOrdering test page'}, {MOCK20override: true});
-    expect(function(){toFront(page)}).to.throw;
-    expect(function(){toBack(5)}).to.throw;
+    expect(function(){toFront(page)}).to.throw();
+    expect(function(){toBack(5)}).to.throw();
   });
   it('should do nothing if used on an object on an invalid page', function(){
     var page = createObj('page', {name: 'ObjectOrdering test page'}, {MOCK20override: true});

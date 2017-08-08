@@ -99,11 +99,11 @@ describe('on()', function(){
     expect(character.get('name')).to.not.equal('Trev');
   });
   it('should break like the Roll20 on()', function(){
-    expect(function(){on()}).to.throw;
-    expect(function(){on(5, function(){})}).to.throw;
+    expect(function(){on()}).to.throw();
+    expect(function(){on(5, function(){})}).to.throw();
 
-    expect(function(){on('invalid')}).to.not.throw;
-    expect(function(){on('invalid', 5)}).to.not.throw;
-    expect(function(){on('add:graphic','invalid')}).to.not.throw;
+    expect(function(){on('invalid')}).to.not.throw();
+    expect(function(){on('invalid', 5)}).to.not.throw();
+    expect(function(){on('add:graphic','invalid')}).to.not.throw();
   });
 });

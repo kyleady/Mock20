@@ -20,6 +20,6 @@ describe('setDefaultTokenForCharacter()', function(){
     expect(character.get('_defaulttoken')).to.be.empty;
     setDefaultTokenForCharacter(character, {});
     expect(character.get('_defaulttoken')).to.be.empty;
-    expect(function(){setDefaultTokenForCharacter(character, 5)}).to.throw;
+    expect(function(){setDefaultTokenForCharacter(character, 5)}).to.throw();
   });
 });

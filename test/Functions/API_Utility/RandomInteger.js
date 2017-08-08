@@ -20,6 +20,6 @@ describe('randomInteger()', function(){
     expect(randomInteger('10.3')).to.be.above(0).and.below(11);
     expect(randomInteger([2,3])).to.be.null;
     expect(randomInteger(0)).to.be.NaN;
-    expect(function(){randomInteger('-2')}).to.throw;
+    expect(function(){randomInteger('-2')}).to.throw();
   });
 });

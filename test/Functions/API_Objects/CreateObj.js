@@ -52,10 +52,10 @@ describe('createObj()', function(){
     expect(newObj).to.be.an('undefined');
   });
   it('should break like the Roll20 createObj()', function(){
-    expect(function(){createObj()}).to.throw;
-    expect(function(){createObj('character')}).to.throw;
+    expect(function(){createObj()}).to.not.throw();
+    expect(function(){createObj('character')}).to.throw();
 
-    expect(function(){createObj(undefined, {})}).to.not.throw;
-    expect(function(){createObj('cat', {})}).to.not.throw;
+    expect(function(){createObj(undefined, {})}).to.not.throw();
+    expect(function(){createObj('cat', {})}).to.not.throw();
   });
 });
