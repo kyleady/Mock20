@@ -1,6 +1,6 @@
 {
   "name": "mock20",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Roll20 nodejs mocker.",
   "main": "index.js",
   "dependencies": {
