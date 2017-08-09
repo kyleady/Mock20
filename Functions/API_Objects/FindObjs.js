@@ -7,7 +7,7 @@ module.exports = function (attrs, options) {
     attrs = {};
   };
 
-  if (typeof options != 'object') {
+  if (options && typeof options != 'object') {
     MOCK20warning('Invalid options for findObjs()');
     options = undefined;
   }
