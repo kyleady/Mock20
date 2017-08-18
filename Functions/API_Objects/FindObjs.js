@@ -54,10 +54,10 @@ function matchingObj(attrs, obj, options) {
   var matching = true;
   for (var prop in attrs) {
     if (options.caseInsensitive
-    && typeof obj.get(prop) == 'string'
+    && typeof obj.MOCK20data[prop] == 'string'
     && typeof attrs[prop] == 'string') {
-      if (obj.get(prop).toLowerCase() != attrs[prop].toLowerCase()) matching = false;
-    } else if (obj.get(prop) != attrs[prop]) {
+      if (obj.MOCK20data[prop].toLowerCase() != attrs[prop].toLowerCase()) matching = false;
+    } else if (obj.MOCK20data[prop] != attrs[prop]) {
       matching = false;
     }
   }
