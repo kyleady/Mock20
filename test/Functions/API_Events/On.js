@@ -106,4 +106,28 @@ describe('on()', function(){
     expect(function(){on('invalid', 5)}).to.not.throw();
     expect(function(){on('add:graphic','invalid')}).to.not.throw();
   });
+  it('should be able to remove events with MOCK20remove', function(){
+    var addAttributeDetected1 = false;
+    var addAttributeDetected2 = false;
+    var attributeDetector1 = function(){
+      addAttributeDetected1 = true;
+    };
+    var attributeDetector2 = function(){
+      addAttributeDetected2 = true;
+    };
+    on('add:attribute', attributeDetector1);
+    on('add:attribute', attributeDetector2);
+    var character = createObj('character', {name: 'test character'});
+    expect(addAttributeDetected1).to.equal(false);
+    expect(addAttributeDetected2).to.equal(false);
+    createObj('attribute', {name: 'test attribute', _characterid: character.id});
+    expect(addAttributeDetected1).to.equal(true);
+    expect(addAttributeDetected2).to.equal(true);
+    addAttributeDetected1 = false;
+    addAttributeDetected2 = false;
+    on({MOCK20remove: true}, attributeDetector2);
+    createObj('attribute', {name: 'test attribute', _characterid: character.id});
+    expect(addAttributeDetected1).to.equal(true);
+    expect(addAttributeDetected2).to.equal(false);
+  });
 });

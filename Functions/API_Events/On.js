@@ -8,6 +8,18 @@ var responses = {};
 
 module.exports = function (eventName, response) {
   if (typeof eventName == 'object' && eventName.MOCK20reset) return responses = {};
+  if (typeof eventName == 'object' && eventName.MOCK20remove) {
+    for (var e in responses) {
+      for (var i = 0; i < responses[e].length; i++) {
+        if (responses[e][i] == response) {
+          return responses[e].splice(i, 1);
+        }
+      }
+    }
+
+    return MOCK20warning('Could not find response within on() to delete.');
+  }
+
   if (typeof eventName != 'string') throw 'invalid or missing channel';
   if (typeof response != 'function') {
     return MOCK20warning('Roll20 would accept the invalid function given for on()'
