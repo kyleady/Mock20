@@ -162,4 +162,17 @@ describe('sendChat():general', function(){
     expect(function(){sendChat('t', 2)}).to.throw();
     expect(function(){sendChat(2, 't')}).to.throw();
   });
+  it('should trigger on(\"chat:message:[your MOCK20tag]\", func)', function(){
+    var tagTriggered = false;
+    on('chat:message:tag_test', function(){
+      tagTriggered = true;
+    });
+    expect(tagTriggered).to.equal(false);
+    sendChat('Mock20', 'Untagged Message');
+    expect(tagTriggered).to.equal(false);
+    sendChat('Mock20', 'Tagged Message', null, {MOCK20tag: 'wrong_tag'});
+    expect(tagTriggered).to.equal(false);
+    sendChat('Mock20', 'Tagged Message', null, {MOCK20tag: 'tag_test'});
+    expect(tagTriggered).to.equal(true);
+  });
 });

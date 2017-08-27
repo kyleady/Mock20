@@ -31,6 +31,7 @@ var sendChat = function (speakingAs, input, callback, options) {
   if (msgError) return;
   if (typeof callback == 'function') return callback(msgs);
   for (var msg of msgs) {
+    if(options.MOCK20tag) MOCK20trigger('chat:message:' + options.MOCK20tag, msg);
     MOCK20trigger('chat:message', msg);
     MOCK20log(JSON.stringify(msg), {}, 'ROLL20 CHAT');
   }
