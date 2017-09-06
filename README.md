@@ -5,6 +5,8 @@
 
 A [node.js](https://nodejs.org/en/) module that mocks the [Roll20](https://roll20.net/) API environment.
 
+For an exmple Roll20 project that uses Mock20, see [Example Mock20 Testing](https://github.com/kyleady/Example-Mock20-Testing).
+
 ## Installation
 
 1) Get [node and npm](https://www.npmjs.com/get-npm).
