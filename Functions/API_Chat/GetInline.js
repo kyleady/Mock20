@@ -8,7 +8,7 @@ var getInline = function (msg) {
       msg.content += '$[[' + counter + ']]';
       msg.content += oldContent.substring(inlineroll.end + 1);
       msg.inlinerolls = msg.inlinerolls || [];
-      msg.inlinerolls.push(inlineroll.text);
+      msg.inlinerolls.push({expression: inlineroll.text});
       counter++;
     } else {
       break;
