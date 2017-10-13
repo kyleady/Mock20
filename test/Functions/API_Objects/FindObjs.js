@@ -28,8 +28,14 @@ describe('findObjs()', function(){
     expect(foundObjs).to.include.members([handout, macro, character]);
     expect(foundObjs).to.not.include(dontFindMe);
   });
-  it('should return undefined if you try to search an invalid type', function(){
-    expect(findObjs({_type: 'not actually a type'})).to.be.undefined;
+
+  it('should return an empty array if there is no matching objs', function(){
+    expect(findObjs({_type: 'attribute', name: 'this is not an existing attribute'})).to.be.an('array');
+    expect(findObjs({_type: 'attribute', name: 'this is not an existing attribute'})).to.be.empty;
+  });
+  it('should return an empty array if you try to search an invalid type', function(){
+    expect(findObjs({_type: 'not actually a type'})).to.be.an('array');
+    expect(findObjs({_type: 'not actually a type'})).to.be.empty;
   });
   it('should properly find objects created by createObj(), including folders, when using a MOCK20override', function(){
     var playlist = createObj('playlist', {n: "find me!"}, {MOCK20override: true});
@@ -43,4 +49,5 @@ describe('findObjs()', function(){
   it('should return every object if given invalid attributes', function(){
     expect(findObjs().length).to.equal(getAllObjs().length);
   });
+
 });

@@ -18,7 +18,7 @@ module.exports = function (attrs, options) {
   };
   var types = {};
   if (attrs._type) {
-    if (Bank[attrs._type] == undefined) return undefined;
+    if (Bank[attrs._type] == undefined) return [];
     types[attrs._type] = true;
   } else {
     for (var type in Bank) {
